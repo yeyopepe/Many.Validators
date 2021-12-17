@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Many.Validators.Tests.Fixtures
+﻿namespace Many.Validators.Tests.TestCaseSources
 {
     internal class InequalityTestCaseSources
     {
@@ -26,6 +20,12 @@ namespace Many.Validators.Tests.Fixtures
         {
             new object[] { false, true },
             new object[] { true, false },
+        };
+        public static readonly object[] Double =
+        {
+            new object[] { 1.0, 1.01 },
+            new object[] { 0.001, 0.0 },
+            new object[] { 1.01, -1.01 },
         };
     }
 }

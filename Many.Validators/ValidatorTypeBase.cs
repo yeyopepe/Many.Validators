@@ -17,10 +17,18 @@ namespace Many.Validators
         /// Ctor.
         /// </summary>
         /// <param name="value">Value</param>
-        protected ValidatorTypeBase(T value)
+        public ValidatorTypeBase(T value)
         {
+            Validation(value);
             this.Value = value;
         }
+
+        /// <summary>
+        /// Validates given value
+        /// </summary>
+        /// <param name="value">Value</param>
+        /// <exception cref="Exception">When validation fails</exception>
+        protected abstract void Validation(T value);
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -29,11 +37,15 @@ namespace Many.Validators
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            if (obj == null ||
+            bool? comparison;
+            if (obj is T)
+                comparison = this.Value?.Equals(((T)obj));
+            else if (obj == null ||
                 !(obj is ValidatorTypeBase<T>))
                 return false;
+            else
+                comparison = this.Value?.Equals(((ValidatorTypeBase<T>)obj).Value);
 
-            var comparison = this.Value?.Equals(((ValidatorTypeBase<T>)obj).Value);
             if (!comparison.HasValue)
                 return false;
 

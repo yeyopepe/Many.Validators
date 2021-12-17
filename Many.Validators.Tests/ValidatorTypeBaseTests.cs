@@ -1,6 +1,8 @@
 using Many.Validators;
 using Many.Validators.Tests.Fixtures;
+using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
+using System;
 
 namespace Many.Validatos.Tests
 {
@@ -10,57 +12,80 @@ namespace Many.Validatos.Tests
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.String))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Int))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Bool))]
-        public void EqualityOperator_ValidCases_ReturnsTrue<T>(T a, T b)
+        [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Double))]
+        public void EqualityOperator_ValidCases_ReturnsTrue<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsTrue(a1 == a2);
         }
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.String))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Int))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Bool))]
-        public void EqualityOperator_InvalidCases_ReturnsFalse<T>(T a, T b)
+        [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Double))]
+        public void EqualityOperator_InvalidCases_ReturnsFalse<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsFalse(a1 == a2);
         }
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.String))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Int))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Bool))]
-        public void InequalityOperator_InvalidCases_ReturnsFalse<T>(T a, T b)
+        [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Double))]
+        public void InequalityOperator_InvalidCases_ReturnsFalse<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsFalse(a1 != a2);
         }
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.String))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Int))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Bool))]
-        public void InequalityOperator_ValidCases_ReturnsTrue<T>(T a, T b)
+        [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Double))]
+        public void InequalityOperator_ValidCases_ReturnsTrue<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsTrue(a1 != a2);
         }
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.String))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Int))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Bool))]
-        public void Equals_ValidCases_ReturnsTrue<T>(T a, T b)
+        [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Double))]
+        public void Equals_ValidCases_ReturnsTrue<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsTrue(a1.Equals(a2));
         }
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.String))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Int))]
         [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Bool))]
-        public void Equals_InvalidCases_ReturnsTrue<T>(T a, T b)
+        [TestCaseSource(typeof(InequalityTestCaseSources), nameof(InequalityTestCaseSources.Double))]
+        public void Equals_InvalidCases_ReturnsTrue<T>(T value1, T value2)
         {
-            None<T> a1 = a;
-            None<T> a2 = b;
+            None<T> a1 = value1;
+            None<T> a2 = value2;
             Assert.IsFalse(a1.Equals(a2));
         }
 
+        #region Implicit conversion
+        [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
+        public void ImplicitConversion_ReturnsUnderlyingType(int value)
+        {
+            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<int>), value);
+        }
+        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
+        public void ImplicitConversion_ReturnsUnderlyingType(string value)
+        {
+            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<string>), value);
+        }
+        [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]
+        public void ImplicitConversion_ReturnsUnderlyingType(int? value)
+        {
+            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<int?>), value);
+        }
+        #endregion Implicit conversion
     }
 }

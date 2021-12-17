@@ -9,10 +9,8 @@ namespace Many.Validators
     /// <exception cref="ArgumentNullException"></exception>
     public sealed class NotNull<T>: ValidatorTypeBase<T>
     {
-        public NotNull(T value):base(value)
+        public NotNull(T value) : base(value)
         {
-            if (value == null)
-                throw new ArgumentNullException();
         }
 
         /// <summary>
@@ -22,6 +20,23 @@ namespace Many.Validators
         public static implicit operator NotNull<T>(T value)
         {
             return new NotNull<T>(value);
+        }
+        /// <summary>
+        /// Implicit conversion method from current to <see cref="T"/>
+        /// </summary>
+        /// <param name="value">Current value</param>
+        public static implicit operator T(NotNull<T> value)
+        {
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
+            return value.Value;
+        }
+
+        /// <see cref="ValidatorTypeBase.Validation(T)"/>
+        protected override void Validation(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
         }
     }
 }
