@@ -1,18 +1,17 @@
-﻿using Many.Validators.Tests.Fixtures;
-using Many.Validators.Tests.TestCaseSources;
+﻿using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
 using System;
 
 namespace Many.Validators.Tests
 {
     [TestFixture]
-    internal class NotNullTests
+    internal class NotNullTests: BaseTests
     {
         #region String
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Null))]
         public void NullValue_ReturnsException(string value)
         {
-            NullValue_ReturnsException<string>(value);
+            CreateValidator_InvalidValues_ThrowsException<NotNull<string>, string, ArgumentNullException>(value);
         }
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Emtpy))]
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
@@ -33,22 +32,15 @@ namespace Many.Validators.Tests
 
         #region Nullable
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]
-        public void NonNullValue_ReturnsValue<T>(T value)
+        public void NonNullValue_ReturnsValue<V>(V value)
         {
-            Assert.DoesNotThrow(() =>
-            {
-                NotNull<T> a1 = value;
-                Assert.IsNotNull(a1);
-            });
+            CreateValidator_ValidValues_ReturnsValue<NotNull<V>, V>(value);
         }
 
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.Null))]
         public void NullValue_ReturnsException(int? value)
         {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                NotNull<int?> a1 = value;
-            });
+            CreateValidator_InvalidValues_ThrowsException<NotNull<int?>, int?, ArgumentNullException>(value);
         }
         #endregion Nullable
 
@@ -56,26 +48,19 @@ namespace Many.Validators.Tests
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(int value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int>), value);
         }
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(string value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<string>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<string>), value);
         }
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(int? value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int?>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int?>), value);
         }
         #endregion Implicit conversion
-
-        private void NullValue_ReturnsException<T>(T value)
-        {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                NotNull<T> a1 = value;
-            });
-        }
+       
     }
 }

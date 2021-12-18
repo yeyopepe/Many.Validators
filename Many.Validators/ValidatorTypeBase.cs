@@ -5,21 +5,21 @@ namespace Many.Validators
     /// <summary>
     /// Base type for validators
     /// </summary>
-    /// <typeparam name="T">Underlying value type</typeparam>
-    public abstract class ValidatorTypeBase<T>
+    /// <typeparam name="V">Underlying value type</typeparam>
+    public abstract class ValidatorTypeBase<V>
     {
         /// <summary>
         /// Gets the value
         /// </summary>
-        public T Value { get; private set; }
+        public V Value { get; private set; }
 
         /// <summary>
         /// Ctor.
         /// </summary>
         /// <param name="value">Value</param>
-        public ValidatorTypeBase(T value)
+        public ValidatorTypeBase(V value)
         {
-            Validation(value);
+            Validate(value);
             this.Value = value;
         }
 
@@ -27,8 +27,12 @@ namespace Many.Validators
         /// Validates given value
         /// </summary>
         /// <param name="value">Value</param>
-        /// <exception cref="Exception">When validation fails</exception>
-        protected abstract void Validation(T value);
+        /// <exception cref="ArgumentNullException">When value is null</exception>
+        protected virtual void Validate(V value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+        }
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.
@@ -38,13 +42,13 @@ namespace Many.Validators
         public override bool Equals(object obj)
         {
             bool? comparison;
-            if (obj is T)
-                comparison = this.Value?.Equals(((T)obj));
+            if (obj is V)
+                comparison = this.Value?.Equals(((V)obj));
             else if (obj == null ||
-                !(obj is ValidatorTypeBase<T>))
+                !(obj is ValidatorTypeBase<V>))
                 return false;
             else
-                comparison = this.Value?.Equals(((ValidatorTypeBase<T>)obj).Value);
+                comparison = this.Value?.Equals(((ValidatorTypeBase<V>)obj).Value);
 
             if (!comparison.HasValue)
                 return false;
@@ -52,11 +56,11 @@ namespace Many.Validators
             return comparison.Value;
         }
 
-        public static bool operator ==(object source, ValidatorTypeBase<T> other)
+        public static bool operator ==(object source, ValidatorTypeBase<V> other)
         {
             return source.Equals(other);
         }
-        public static bool operator !=(object source, ValidatorTypeBase<T> other)
+        public static bool operator !=(object source, ValidatorTypeBase<V> other)
         {
             return !source.Equals(other);
         }

@@ -3,38 +3,40 @@
 namespace Many.Validators
 {
     /// <summary>
-    /// Non-validations type
+    /// Non-validations type. Only for test porpuse
     /// </summary>
-    /// <typeparam name="T">Underlying value type</typeparam>
-    public sealed class None<T>: ValidatorTypeBase<T>
+    /// <typeparam name="V">Underlying value type</typeparam>
+    internal class None<V>: ValidatorTypeBase<V>
     {
-        public None(T value):base(value)
-        {
-        }
-
-        /// <see cref="ValidatorTypeBase.Validation(T)"/>
-        protected override void Validation(T value)
+        public None(V value):base(value)
         {
             //Nothing to do
         }
 
         /// <summary>
-        /// Implicit conversion method from <see cref="T"/> to current
+        /// Implicit conversion method from <see cref="V"/> to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator None<T>(T value)
+        public static implicit operator None<V>(V value)
         {
-            return new None<T>(value);
+            return new None<V>(value);
         }
         /// <summary>
-        /// Implicit conversion method from current to <see cref="T"/>
+        /// Implicit conversion method from current to <see cref="V"/>
         /// </summary>
         /// <param name="value">Current value</param>
-        public static implicit operator T(None<T> value)
+        /// <exception cref="ArgumentNullException"></exception>
+        public static implicit operator V(None<V> value)
         {
             if (value is null)
                 throw new ArgumentNullException(nameof(value));
             return value.Value;
+        }
+
+        /// <inheritdoc/>
+        protected override void Validate(V value)
+        {
+            //Nothing to do
         }
     }
 }

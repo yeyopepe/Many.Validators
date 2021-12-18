@@ -1,0 +1,1 @@
+nuget pack .\Many.Validators.nuspec -Symbols -SymbolPackageFormat snupkg

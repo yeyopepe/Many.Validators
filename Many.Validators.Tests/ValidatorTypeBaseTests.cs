@@ -1,13 +1,10 @@
-using Many.Validators;
-using Many.Validators.Tests.Fixtures;
 using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
-using System;
 
-namespace Many.Validatos.Tests
+namespace Many.Validators.Tests
 {
     [TestFixture]
-    public class ValidatorTypeBaseTests
+    public class ValidatorTypeBaseTests: BaseTests
     {
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.String))]
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.Int))]
@@ -74,17 +71,17 @@ namespace Many.Validatos.Tests
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(int value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<int>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(None<int>), value);
         }
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(string value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<string>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(None<string>), value);
         }
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(int? value)
         {
-            ImplicitConversionFixture.ImplicitConversion_ReturnsUnderlyingType(typeof(None<int?>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(None<int?>), value);
         }
         #endregion Implicit conversion
     }

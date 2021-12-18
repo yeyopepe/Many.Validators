@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+	<metadata>
+		<id>Many.Validators</id>
+		<title>A set of performance-focused extensible immutable types to add seamless validations in your projects.</title>
+		<version>1.0.0</version>
+		<authors>Sergio José Martínez Primiani</authors>
+		<owners>Sergio José Martínez Primiani</owners>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<projectUrl>https://github.com/yeyopepe/Many.Validators</projectUrl>
+		<iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
+		<description>A set of performance-focused extensible immutable types to add seamless validations in your projects. Also you can create your own custom validators.</description>
+		<tags>validation validator conversion exception error errorhandling parameter performance net60</tags>
+		<repository type="git" url="https://github.com/yeyopepe/Many.Mocks" />
+		<releaseNotes>
+			v.1.0.0
+			- xxx
+		</releaseNotes>
+		
+		<dependencies>
+			<group targetFramework=".NETStandard2.1">				
+			</group>
+			<group targetFramework="NET60">
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="Many.Mocks\bin\Release\netstandard2.1\Many.Validators.*" target="lib\netstandard2.1" />
+		<file src="Many.Mocks\bin\Release\net60\Many.Validators.*" target="lib\net60" />
+	</files>
+</package>
