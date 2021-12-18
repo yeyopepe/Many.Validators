@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Reflection;
 
 namespace Many.Validators.Tests
 {
@@ -30,10 +31,11 @@ namespace Many.Validators.Tests
         protected void CreateValidator_InvalidValues_ThrowsException<T,V,Ex>(V value)
             where Ex: Exception
         {
-            Assert.Throws<Ex>(() =>
+            var result = Assert.Throws<TargetInvocationException>(() =>
             {
                 var validator = Activator.CreateInstance(typeof(T), new object[] { value });
             });
+            Assert.AreEqual(result.InnerException.GetType(), typeof(Ex), "Unexpected exception type");
         }
 
         /// <summary>
