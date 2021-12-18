@@ -38,7 +38,11 @@ namespace Many.Validators.Tests.TestCaseSources
         };
         public static readonly Double[] Double =
         {
+#if NET47_OR_GREATER
+            -1.797693134862315E+308 //Accuracy bug in this version
+#else
             double.MinValue,
+#endif
             -0.000000000000000000000000000000000000000000001f
         };
         public static readonly Decimal[] Decimal =

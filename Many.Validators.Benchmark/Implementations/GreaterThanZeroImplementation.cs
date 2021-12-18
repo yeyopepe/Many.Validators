@@ -2,13 +2,13 @@
 using System;
 using System.Linq;
 
-namespace Many.Validators.Benchmark
+namespace Many.Validators.Benchmark.Implementations
 {
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net472, warmupCount: 1)]
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp31, warmupCount: 1)]
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, warmupCount: 1)]
     [IterationCount(2)]
-    public class GreaterThanZeroValidator
+    public class GreaterThanZeroImplementation
     {
         [Benchmark]
         [Arguments(1)]

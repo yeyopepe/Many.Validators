@@ -22,10 +22,13 @@
 			</group>
 			<group targetFramework="NET60">
 			</group>
+			<group targetFramework="net472">
+			</group>
 		</dependencies>
 	</metadata>
 	<files>
 		<file src="Many.Mocks\bin\Release\netstandard2.1\Many.Validators.*" target="lib\netstandard2.1" />
 		<file src="Many.Mocks\bin\Release\net60\Many.Validators.*" target="lib\net60" />
+		<file src="Many.Mocks\bin\Release\net472\Many.Validators.*" target="lib\net60" />
 	</files>
 </package>
