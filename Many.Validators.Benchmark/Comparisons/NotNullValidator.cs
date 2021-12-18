@@ -1,44 +1,72 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System;
-using System.Linq;
 
 namespace Many.Validators.Benchmark.Comparisons
 {
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net472, warmupCount: 1)]
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp31, warmupCount: 1)]
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, warmupCount: 1)]
-    [IterationCount(2)]
+    [MemoryDiagnoser]
+    [MedianColumn]
+    [IterationCount(1)]
     public class NotNullValidator
     {
-        //[Benchmark]
-        //[Arguments(1)]
-        //[Arguments(Int16.MaxValue)]
-        //public void Validate1_Int16(Int16 value) => Validate1(value);
-        
-
-        public static void WithoutValidator()
+        [Benchmark(Baseline = true)]
+        [Arguments(null)]
+        public void ValidatorFail_String_WithoutValidator(string value)
         {
+            try
+            {
+                WithoutValidatorMethod(value);
+            }
+            catch { return; }
 
+            throw new Exception("Test is not valid");
+        }
+        [Benchmark]
+        [Arguments(null)]
+        public void ValidatorFail_String_Conversion_WithValidator(string value)
+        {
+            try
+            {
+                WithValidatorMethod<string>(value);
+            }
+            catch { return; }
+
+            throw new Exception("Test is not valid");
+        }
+        [Benchmark]
+        [Arguments(null)]
+        public void ValidatorFail_String_NoConversion_WithValidator(string value)
+        {
+            try
+            {
+                WithValidatorMethod(new NotNull<string>(value));
+            }
+            catch { return; }
+
+            throw new Exception("Test is not valid");
         }
 
-        public static void WithValidator()
-        {
+        [Benchmark(Baseline = true)]
+        [Arguments("something")]
+        public void ValidatorSuccess_String_WithoutValidator(string value) => WithoutValidatorMethod(value);
+        [Benchmark]
+        [Arguments("something")]
+        public void ValidatorSuccess_String_Conversion_WithValidator(string value) => WithValidatorMethod<string>(value);
+        [Benchmark]
+        [Arguments("something")]
+        public void ValidatorSuccess_String_NoConversion_WithValidator(string value) => WithValidatorMethod(new NotNull<string>(value));
 
-        }
-
-
-        private static void WithoutValidatorMethod<T>(T notNullValue)
+        private static void WithoutValidatorMethod<V>(V notNullValue)
         {
             if (notNullValue == null)
                 throw new ArgumentNullException(nameof(notNullValue));
-            
+
             return;
         }
-        private static void WithValidatorMethod<T>(NotNull<T> notNullValue)
+        private static void WithValidatorMethod<V>(NotNull<V> notNullValue)
         {
-            if (notNullValue == null)
-                throw new ArgumentNullException(nameof(notNullValue));
-
             return;
         }
     }

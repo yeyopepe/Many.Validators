@@ -9,7 +9,8 @@ namespace Many.Validators.Benchmark
         {
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
 
-            var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
+            //var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
+            var summary = BenchmarkRunner.Run<Comparisons.NotNullValidator>();
 
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
         }
