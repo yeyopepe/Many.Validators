@@ -8,12 +8,12 @@ namespace Many.Validators.Benchmark.Comparisons
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, warmupCount: 1)]
     [MemoryDiagnoser]
     [MedianColumn]
-    [IterationCount(1)]
+    [IterationCount(2)]
     public class NotNullValidator
     {
         [Benchmark(Baseline = true)]
         [Arguments(null)]
-        public void ValidatorFail_String_WithoutValidator(string value)
+        public void Fail_String_WithoutValidator(string value)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Many.Validators.Benchmark.Comparisons
         }
         [Benchmark]
         [Arguments(null)]
-        public void ValidatorFail_String_Conversion_WithValidator(string value)
+        public void Fail_String_Conversion_WithValidator(string value)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Many.Validators.Benchmark.Comparisons
         }
         [Benchmark]
         [Arguments(null)]
-        public void ValidatorFail_String_NoConversion_WithValidator(string value)
+        public void Fail_String_NoConversion_WithValidator(string value)
         {
             try
             {
@@ -50,13 +50,13 @@ namespace Many.Validators.Benchmark.Comparisons
 
         [Benchmark(Baseline = true)]
         [Arguments("something")]
-        public void ValidatorSuccess_String_WithoutValidator(string value) => WithoutValidatorMethod(value);
+        public void Success_String_WithoutValidator(string value) => WithoutValidatorMethod(value);
         [Benchmark]
         [Arguments("something")]
-        public void ValidatorSuccess_String_Conversion_WithValidator(string value) => WithValidatorMethod<string>(value);
+        public void Success_String_Conversion_WithValidator(string value) => WithValidatorMethod<string>(value);
         [Benchmark]
         [Arguments("something")]
-        public void ValidatorSuccess_String_NoConversion_WithValidator(string value) => WithValidatorMethod(new NotNull<string>(value));
+        public void Success_String_NoConversion_WithValidator(string value) => WithValidatorMethod(new NotNull<string>(value));
 
         private static void WithoutValidatorMethod<V>(V notNullValue)
         {

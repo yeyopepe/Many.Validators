@@ -26,17 +26,19 @@ namespace Many.Validators
         /// Implicit conversion method from current to <see cref="V"/>
         /// </summary>
         /// <param name="value">Current value</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(NotNull<V> value)
         {
+#if NET5_0_OR_GREATER
+            return value.Value ?? throw new ArgumentNullException(nameof(value));
+#else
             if (value is null)
                 throw new ArgumentNullException(nameof(value));
             return value.Value;
+#endif
+
         }
 
-        /// <inheritdoc/>
-        protected override void Validate(V value)
-        {
-            base.Validate(value); //Same validation as base
-        }
+        //Same validation as base. No override needed
     }
 }

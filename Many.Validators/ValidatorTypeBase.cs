@@ -50,10 +50,7 @@ namespace Many.Validators
             else
                 comparison = this.Value?.Equals(((ValidatorTypeBase<V>)obj).Value);
 
-            if (!comparison.HasValue)
-                return false;
-
-            return comparison.Value;
+            return comparison.HasValue && comparison.Value;
         }
 
         public static bool operator ==(object source, ValidatorTypeBase<V> other)

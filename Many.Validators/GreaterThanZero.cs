@@ -7,6 +7,7 @@ namespace Many.Validators
     /// Numeric validation type to check if a number is greater than zero
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
+    /// <see cref="Validate(V)"/>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public sealed class GreaterThanZero<V>: ValidatorTypeBase<V>
     {
@@ -27,6 +28,7 @@ namespace Many.Validators
         /// Implicit conversion method from current to <see cref="V"/>
         /// </summary>
         /// <param name="value">Current value</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(GreaterThanZero<V> value)
         {
             if (value is null)
