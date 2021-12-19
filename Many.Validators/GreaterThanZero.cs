@@ -56,30 +56,30 @@ namespace Many.Validators
 
             var result = false;
             var t = typeof(V);
-            if (t.Equals(typeof(Int16)))
+            if (t.Equals(typeof(Int16)) || t.Equals(typeof(Int16?)))
                 result = Int16.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Int32)))
+            else if (t.Equals(typeof(Int32)) || t.Equals(typeof(Int32?)))
                 result = Int32.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Int64)))
+            else if (t.Equals(typeof(Int64)) || t.Equals(typeof(Int64?)))
                 result = Int64.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(SByte)))
+            else if (t.Equals(typeof(SByte)) || t.Equals(typeof(SByte?)))
                 result = SByte.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(UInt16)))
+            else if (t.Equals(typeof(UInt16)) || t.Equals(typeof(UInt16?)))
                 result = UInt16.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(UInt32)))
+            else if (t.Equals(typeof(UInt32)) || t.Equals(typeof(UInt32?)))
                 result = UInt32.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(UInt64)))
+            else if (t.Equals(typeof(UInt64)) || t.Equals(typeof(UInt64?)))
                 result = UInt64.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Byte)))
+            else if (t.Equals(typeof(Byte)) || t.Equals(typeof(Byte?)))
                 result = Byte.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Single)))
+            else if (t.Equals(typeof(Single)) || t.Equals(typeof(Single?)))
                 result = Single.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Double)))
+            else if (t.Equals(typeof(Double)) || t.Equals(typeof(Double?)))
                 result = Double.Parse(value.ToString()) > 0;
-            else if (t.Equals(typeof(Decimal)))
+            else if (t.Equals(typeof(Decimal)) || t.Equals(typeof(Decimal?)))
                 result = Decimal.Parse(value.ToString()) > 0;
 #if NET5_0_OR_GREATER
-            else if (t.Equals(typeof(Half)))
+            else if (t.Equals(typeof(Half)) || t.Equals(typeof(Half?)))
                 result = Half.Parse(value.ToString()) > (Half)0;
 #endif
             else
