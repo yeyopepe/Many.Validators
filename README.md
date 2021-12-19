@@ -20,17 +20,22 @@ I focused on:
 
 <br/>
 
-### Built-int validators 
+### Built-int validators and features roadmap 
 
 |Validator                    |Implemented|Benchmarked|Version
 |-----------------------------|:---------:|:---------:|:-------:
-|NotNull<>                    |✅         |✅        |0.9.0
-|NotNullOrEmpty< string>      |✅         |✅        |0.9.0
-|Positive<>                   |✅         |❌        |0.9.0
-|PositiveOrZero<>             |✅         |❌        |0.9.0
-|Negative<>                   |✅         |❌        |0.9.0
-|NegativeOrZero<>             |✅         |❌        |0.9.0
+|NotNull<>                    |✅         |✅        |WIP
+|NotNullOrEmpty< string>      |✅         |✅        |WIP
+|Positive<>                   |✅         |❌        |WIP
+|PositiveOrZero<>             |✅         |❌        |WIP
+|Negative<>                   |✅         |❌        |WIP
+|NegativeOrZero<>             |✅         |❌        |WIP
 
+<br/>
+
+|Feature                    |Implemented|Version
+|---------------------------|:---------:|:-------:
+|Validators concatenation   |❌         |?
 
 <br/>
 
@@ -51,6 +56,8 @@ bool WhateverMethod(NotNull<string> @param)
     //If validation fails no line of code will be run in this method
 
     Console.WriteLine("Whatever");
+    
+    //Gets @param value with no conversion
     return !string.IsNullOrWhiteSpace(@param); 
 }
 ```
@@ -71,7 +78,3 @@ var result = WhateverMethod(p);
 <br/>
 
 ### How to create your own validators
-
-<br/>
-
-### Validators concatenation
