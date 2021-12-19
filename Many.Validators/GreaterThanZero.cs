@@ -9,12 +9,15 @@ namespace Many.Validators
     /// <typeparam name="V">Underlying value type</typeparam>
     /// <see cref="Validate(V)"/>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public sealed class GreaterThanZero<V>:BaseClass<V>
+    public readonly struct GreaterThanZero<V>:IValidator<V>
     {
+        /// <inheritdoc/>
+        public V Value { get; }
+
         public GreaterThanZero(V value)
         {
+            this.Value = value;
             Validate(value);
-            Value = value;
         }
 
         /// <summary>
@@ -32,15 +35,24 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(GreaterThanZero<V> value)
         {
-            ThrowExceptionIfNull(value);
+            value.ThrowExceptionIfNull<GreaterThanZero<V>, V>();
             return value.Value;
         }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this.Value.OverrideEquals<GreaterThanZero<V>, V>(obj);
+        public static bool operator ==(object source, GreaterThanZero<V> other) => source.Equals(other);
+        public static bool operator !=(object source, GreaterThanZero<V> other) => !source.Equals(other);
+        /// <inheritdoc/>
+        public override string ToString() => Value.OverrideToString();
+        /// <inheritdoc/>
+        public override int GetHashCode() => Value.OverrideGetHashCode();
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void Validate(V value)
         {
-            ThrowExceptionIfNull(value);
+            value.ThrowExceptionIfNull<GreaterThanZero<V>, V>();
 
             var result = false;
             var t = typeof(V);
@@ -71,40 +83,12 @@ namespace Many.Validators
                 result = Half.Parse(value.ToString()) > (Half)0;
 #endif
             else
-                throw new ArgumentException($"Value {value} can not be evaluated because type is not recognized ({t})");
+                throw new ArgumentException(value.GetExceptionMessage<GreaterThanZero<V>,V>("can not be evaluated because type is not recognized ({t})"));
 
             if (!result)
-                throw new ArgumentOutOfRangeException($"Value {value} must be greater than zero.");
+                throw new ArgumentOutOfRangeException(value.GetExceptionMessage<GreaterThanZero<V>, V>("must be greater than zer"));
         }
 
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            bool? comparison;
-            if (obj is V)
-                comparison = this.Value?.Equals(((V)obj));
-            else if (obj == null ||
-                !(obj is GreaterThanZero<V>))
-                return false;
-            else
-                comparison = this.Value?.Equals(((GreaterThanZero<V>)obj).Value);
-
-            return comparison.HasValue && comparison.Value;
-        }
-
-        public static bool operator ==(object source, GreaterThanZero<V> other)
-        {
-            return source.Equals(other);
-        }
-        public static bool operator !=(object source, GreaterThanZero<V> other)
-        {
-            return !source.Equals(other);
-        }
-      
     }
 }

@@ -12,7 +12,7 @@ namespace Many.Validators.Benchmark
             //var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
 
             var summary1 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorStringBenchmark>();
-            //var summary2 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorNullableIntBenchmark>();
+            var summary2 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorNullableIntBenchmark>();
 
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
         }

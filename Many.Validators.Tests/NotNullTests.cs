@@ -61,6 +61,7 @@ namespace Many.Validators.Tests
             ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int?>), value);
         }
         #endregion Implicit conversion
-       
+
+      
     }
 }

@@ -2,15 +2,19 @@
 
 namespace Many.Validators
 {
+    //TODO: REmove???
     /// <summary>
     /// Non-validations type. Only for test porpuse
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
-    internal class None<V>:BaseClass<V>
+    internal readonly struct None<V>: IValidator<V>
     {
+        /// <inheritdoc/>
+        public V Value { get; }
+
         public None(V value)
         {
-            //Nothing to do
+            this.Value = value;
         }
 
         /// <summary>
@@ -28,37 +32,17 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(None<V> value)
         {
-            ThrowExceptionIfNull(value);
+            value.ThrowExceptionIfNull<None<V>, V>();
             return value.Value;
         }
 
-        /// <summary>
-        /// Determines whether the specified object is equal to the current object.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            bool? comparison;
-            if (obj is V)
-                comparison = this.Value?.Equals(((V)obj));
-            else if (obj == null ||
-                !(obj is None<V>))
-                return false;
-            else
-                comparison = this.Value?.Equals(((None<V>)obj).Value);
-
-            return comparison.HasValue && comparison.Value;
-        }
-
-        public static bool operator ==(object source, None<V> other)
-        {
-            return source.Equals(other);
-        }
-        public static bool operator !=(object source, None<V> other)
-        {
-            return !source.Equals(other);
-        }
-       
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this.Value.OverrideEquals<None<V>, V>(obj);
+        public static bool operator ==(object source, None<V> other) => source.Equals(other);
+        public static bool operator !=(object source, None<V> other) => !source.Equals(other);
+        /// <inheritdoc/>
+        public override string ToString() => Value.OverrideToString();
+        /// <inheritdoc/>
+        public override int GetHashCode() => Value.OverrideGetHashCode();
     }
 }

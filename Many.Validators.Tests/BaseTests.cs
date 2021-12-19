@@ -13,6 +13,7 @@ namespace Many.Validators.Tests
         /// <typeparam name="V">Value type</typeparam>
         /// <param name="value"></param>
         protected void CreateValidator_ValidValues_ReturnsValue<T,V>(V value)
+            where T : IValidator<V>
         {
             Assert.DoesNotThrow(() =>
             {
@@ -29,6 +30,7 @@ namespace Many.Validators.Tests
         /// <typeparam name="Ex">Expected exception</typeparam>
         /// <param name="value"></param>
         protected void CreateValidator_InvalidValues_ThrowsException<T,V,Ex>(V value)
+            where T: IValidator<V>
             where Ex: Exception
         {
             var result = Assert.Throws<TargetInvocationException>(() =>
@@ -36,6 +38,9 @@ namespace Many.Validators.Tests
                 var validator = Activator.CreateInstance(typeof(T), new object[] { value });
             });
             Assert.AreEqual(result.InnerException.GetType(), typeof(Ex), "Unexpected exception type");
+
+            var msgToCheck = $"{typeof(T).Name} of {typeof(V).Name}";
+            Assert.IsTrue(result.InnerException.Message.Contains(msgToCheck), "Unexpected exception message");
         }
 
         /// <summary>
