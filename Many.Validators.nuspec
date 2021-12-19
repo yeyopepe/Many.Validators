@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/yeyopepe/Many.Validators</projectUrl>
 		<iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
 		<description>A set of performance-focused extensible immutable types to add seamless validations in your projects. Also you can create your own custom validators.</description>
-		<tags>validation validator conversion exception error errorhandling parameter performance net60</tags>
+		<tags>erformance validator conversion error-handling error exceptions exception-handling exception-reporting net60 netstandard netstandard21 net472</tags>
 		<repository type="git" url="https://github.com/yeyopepe/Many.Mocks" />
 		<releaseNotes>
 			v.1.0.0
@@ -29,6 +29,6 @@
 	<files>
 		<file src="Many.Mocks\bin\Release\netstandard2.1\Many.Validators.*" target="lib\netstandard2.1" />
 		<file src="Many.Mocks\bin\Release\net60\Many.Validators.*" target="lib\net60" />
-		<file src="Many.Mocks\bin\Release\net472\Many.Validators.*" target="lib\net60" />
+		<file src="Many.Mocks\bin\Release\net472\Many.Validators.*" target="lib\net472" />
 	</files>
 </package>
