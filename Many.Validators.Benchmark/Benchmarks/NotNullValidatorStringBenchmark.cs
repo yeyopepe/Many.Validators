@@ -8,7 +8,7 @@ namespace Many.Validators.Benchmark.Benchmarks
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, warmupCount: 1)]
     [MemoryDiagnoser]
     [MedianColumn]
-    [IterationCount(2)]
+    [IterationCount(3)]
     public class NotNullValidatorStringBenchmark : ValidatorBenchmarkBase<string>
     {
         public NotNullValidatorStringBenchmark() : base("something")

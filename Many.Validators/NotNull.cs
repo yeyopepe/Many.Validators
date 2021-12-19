@@ -32,8 +32,7 @@ namespace Many.Validators
 #if NET5_0_OR_GREATER
             return value.Value ?? throw new ArgumentNullException(nameof(value));
 #else
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            value.ThrowExceptionIfNull();
             return value.Value;
 #endif
 

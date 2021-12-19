@@ -18,8 +18,20 @@ namespace Many.Validators.Tests
         [TestCaseSource(typeof(NumericRangeGreaterThanZeroTestCaseSources), nameof(NumericRangeGreaterThanZeroTestCaseSources.Double))]
         [TestCaseSource(typeof(NumericRangeGreaterThanZeroTestCaseSources), nameof(NumericRangeGreaterThanZeroTestCaseSources.Single))]
         [TestCaseSource(typeof(NumericRangeGreaterThanZeroTestCaseSources), nameof(NumericRangeGreaterThanZeroTestCaseSources.Decimal))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Int16))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Int32))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Int64))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.SByte))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.UInt16))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.UInt32))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.UInt64))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Byte))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Double))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Single))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Decimal))]
 #if NET5_0_OR_GREATER
         [TestCaseSource(typeof(NumericRangeGreaterThanZeroTestCaseSources), nameof(NumericRangeGreaterThanZeroTestCaseSources.Half))]
+        [TestCaseSource(typeof(NullableNumericRangeGreaterThanZeroTestCaseSources), nameof(NullableNumericRangeGreaterThanZeroTestCaseSources.Half))]
 #endif
         public void GreaterThanZero_ReturnsValue<V>(V value)
         {

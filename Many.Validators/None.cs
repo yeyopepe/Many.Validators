@@ -28,8 +28,7 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(None<V> value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            value.ThrowExceptionIfNull();
             return value.Value;
         }
 
