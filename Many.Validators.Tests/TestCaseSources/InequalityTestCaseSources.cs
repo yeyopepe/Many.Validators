@@ -2,30 +2,45 @@
 {
     internal class InequalityTestCaseSources
     {
-       public static readonly object[] Int =
+       public static readonly object[] IntPositive =
        {
-            new object[] { 10, 0 },
-            new object[] { 0, -10 },
-            new object[] { -123, -1230 },
+            new object[] { 10, 1 },
+            new object[] { 1, 10 },
+            new object[] { 123, 1230 },
             new object[] { 13, 123 },
         };
-        public static readonly object[] String =
+        public static readonly object[] IntNegative =
+       {
+            new object[] { -10, -1 },
+            new object[] { -1, -10 },
+            new object[] { -123, -1230 },
+            new object[] { -13, -123 },
+        };
+        public static readonly object[] EmptyString =
         {
             new object[] { "", " " },
             new object[] { " ", "  " },
+        };
+        public static readonly object[] NotEmptyString =
+        {
             new object[] { "asdasdff", "asdf" },
-            new object[] { "", null }
         };
         public static readonly object[] Bool =
         {
             new object[] { false, true },
             new object[] { true, false },
         };
-        public static readonly object[] Double =
+        public static readonly object[] DoublePositive =
         {
             new object[] { 1.0, 1.01 },
-            new object[] { 0.001, 0.0 },
-            new object[] { 1.01, -1.01 },
+            new object[] { 0.001, 0.1 },
+            new object[] { 1.01, 1.011 },
+        };
+        public static readonly object[] DoubleNegative =
+        {
+            new object[] { -1.0, -1.01 },
+            new object[] { -0.001, -0.1 },
+            new object[] { -1.01, -1.011 },
         };
     }
 }

@@ -10,5 +10,9 @@
         /// Gets the value
         /// </summary>
         TValue Value { get; }
+
+        bool Equals(object obj);
+        string ToString();
+        int GetHashCode();
     }
 }

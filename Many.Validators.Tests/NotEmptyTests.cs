@@ -5,7 +5,7 @@ using System;
 namespace Many.Validators.Tests
 {
     [TestFixture]
-    internal class NotEmtpyTests: BaseTests
+    internal partial class NotEmtpyTests: BaseTests
     {
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Empty))]
         public void EmptyValue_ReturnsException(string value)
@@ -22,7 +22,7 @@ namespace Many.Validators.Tests
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
         public void ImplicitConversion_ReturnsUnderlyingType(string value)
         {
-            ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<string>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(NotEmpty), value);
         }
         #endregion Implicit conversion
     }

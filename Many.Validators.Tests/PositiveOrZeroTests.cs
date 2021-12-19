@@ -5,7 +5,7 @@ using System;
 namespace Many.Validators.Tests
 {
     [TestFixture]
-    internal class PositiveOrZeroTests : BaseTests
+    internal partial class PositiveOrZeroTests : BaseTests
     {
         [TestCaseSource(typeof(NumericPositiveTestCaseSources), nameof(NumericPositiveTestCaseSources.Int16))]
         [TestCaseSource(typeof(NumericPositiveTestCaseSources), nameof(NumericPositiveTestCaseSources.Int32))]

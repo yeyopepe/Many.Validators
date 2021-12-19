@@ -13,7 +13,8 @@
         public static readonly string[] Empty =
         {
             "",
-            " "
+            " ",
+            "      "
         };
 
     }

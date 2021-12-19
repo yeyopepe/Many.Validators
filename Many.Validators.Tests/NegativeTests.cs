@@ -5,7 +5,7 @@ using System;
 namespace Many.Validators.Tests
 {
     [TestFixture]
-    internal class NegativeTests: BaseTests
+    internal partial class NegativeTests: BaseTests
     {
         [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int16))]
         [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int32))]
@@ -90,8 +90,10 @@ namespace Many.Validators.Tests
         public void ImplicitConversion_ReturnsUnderlyingType<TValue>(TValue value)
         {
             ImplicitConversion_ReturnsUnderlyingType(typeof(Negative<TValue>), value);
-        }       
+        }
         #endregion Implicit conversion
+
+        
     }
 }
 

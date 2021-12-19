@@ -5,7 +5,7 @@ using System;
 namespace Many.Validators.Tests
 {
     [TestFixture]
-    internal class NotNullTests: BaseTests
+    internal partial class NotNullTests: BaseTests
     {
         #region Class
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Null))]
@@ -61,27 +61,5 @@ namespace Many.Validators.Tests
             ImplicitConversion_ReturnsUnderlyingType(typeof(NotNull<int?>), value);
         }
         #endregion Implicit conversion
-
-        #region Overrides
-        public void EqualValues_ReturnsTrue(string value)
-        {
-            NotNull<string> a = value;
-            Assert.IsTrue(a.Equals(value));
-        }
-        public void EqualValues_ReturnsTrue(int value)
-        {
-            NotNull<int> a = value;
-            Assert.IsTrue(a.Equals(value));
-        }
-        public void EqualValues_ReturnsTrue(int? value)
-        {
-            NotNull<int?> a = value;
-            Assert.IsTrue(a.Equals(value));
-        }
-        public void NotEqualValues_ReturnsTrue()
-        {
-        }
-
-        #endregion Overrides
     }
 }
