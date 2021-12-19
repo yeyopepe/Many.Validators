@@ -1,15 +1,36 @@
 # Many.Validators
-A set of performance-focused extensible immutable types to add seamless validations in your projects. Also you can create your own custom validators.
+A set of very-easy-to-read immutable types to add seamless validations in your projects. Of course you can also create your own custom validators.
 
-👉Lastest release at https://www.nuget.org/packages/Many.Validators/
+I focused on:
+- Less documentation, better code legibility.
+- No extra line of code.
+- [Extremely] easy integration.
+- Minimum overhead compared to traditional copy-pasted-conditionals way or any other implementation.
 
-# **Key features**
+<br/>
 
-## NetStandard 2.1 and NET60 specific implementations
-- New Half type support
+👉Download releases at https://www.nuget.org/packages/Many.Validators/
 
+<br/>
 
-## 2-way conversion between validator and underlying types
+# Features
+
+### NetStandard 2.1 and NET60 specific implementations
+- New Half type support for NET5 and NET6 projects.
+
+<br/>
+
+### A complete set of Built-int validators 
+- NotNull ✅
+- NotEmpty ❌
+- Positive ✅
+- PositiveOrZero ❌
+- Negative ❌
+- NegativeOrZero ❌
+
+<br/>
+
+### Two-way conversion between validator and underlying types
 ```
 NotNull<string> notMullStringValidator = "whatever"; //Ok
 string x = notMullStringValidator; //Ok
@@ -17,13 +38,13 @@ string x = notMullStringValidator; //Ok
 notMullStringValidator.Equals(x); //true!
 ```
 
-## Seamless integration. Not a single line of code needed
-Use validators in your methods like any other type:
+### Seamless integration
+Use validators in your methods referring your underlying type:
 ```
-bool NotNullParamFunction(NotNull<string> @param)
+bool WhateverMethod(NotNull<string> @param)
 {
     //@param is observed and validated when is instantiated. 
-    //No line of code will be run in this method if validation does not pass
+    //If validation fails no line of code will be run in this method
 
     Console.WriteLine("Whatever");
     return !string.IsNullOrWhiteSpace(@param); 
@@ -33,21 +54,20 @@ bool NotNullParamFunction(NotNull<string> @param)
 And call your methods as usual with no additional conversions:
 
 ```
-try
-{
-    string p = null;
-    var f = NotNullParamFunction(p);
-    Debug.Fail("NotNullParamFunction should have thrown ArgumentNullException");
-}
-catch (Exception ex)
-{
-    Debug.Assert(ex is ArgumentNullException, "Wrong exception");
-}
+string p;
+
+<Code where you can assign a value to p or not...>
+
+var result = WhateverMethod(p);
+
+<Continues if no exception was raised...>
+
 ```
 
+<br/>
 
+### How to create your own validators
 
-## A complete set of Built-int validators 
-xxxx
+<br/>
 
-## How to create your own validators
+### Validators concatenation

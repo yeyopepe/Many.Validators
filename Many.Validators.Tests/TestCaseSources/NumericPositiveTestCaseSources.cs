@@ -2,7 +2,7 @@
 
 namespace Many.Validators.Tests.TestCaseSources
 {
-    internal class NumericRangeGreaterThanZeroTestCaseSources
+    internal class NumericPositiveTestCaseSources
     {
         public static readonly Int16[] Int16 =
         {

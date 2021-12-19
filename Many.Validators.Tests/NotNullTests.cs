@@ -7,7 +7,7 @@ namespace Many.Validators.Tests
     [TestFixture]
     internal class NotNullTests: BaseTests
     {
-        #region String
+        #region Class
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Null))]
         public void NullValue_ReturnsException(string value)
         {
@@ -19,16 +19,16 @@ namespace Many.Validators.Tests
         {
             NonNullValue_ReturnsValue<string>(value);
         }
-        #endregion String
+        #endregion Class
 
-        #region Int
+        #region Struct
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
         public void NonNullValue_ReturnsValue(int value)
         {
             NonNullValue_ReturnsValue<int>(value);
         }
-        #endregion Int
+        #endregion Struct
 
         #region Nullable
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]

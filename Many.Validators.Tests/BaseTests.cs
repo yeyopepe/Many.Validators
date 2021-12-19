@@ -48,14 +48,15 @@ namespace Many.Validators.Tests
         /// </summary>
         /// <typeparam name="V">Value type</typeparam>
         /// <param name="validatorType"></param>
-        /// <param name="value"></param>
-        public static void ImplicitConversion_ReturnsUnderlyingType<V>(Type validatorType, V value)
+        /// <param name="validValueForCurrentValidator"></param>
+        public static void ImplicitConversion_ReturnsUnderlyingType<V>(Type validatorType, V validValueForCurrentValidator)
         {
-            dynamic validatorInstance = Activator.CreateInstance(validatorType, value);
+            dynamic validatorInstance = Activator.CreateInstance(validatorType, validValueForCurrentValidator);
 
             V result = validatorInstance;
 
-            Assert.AreEqual(value, result);
+            Assert.AreEqual(validValueForCurrentValidator, result);
         }
+
     }
 }

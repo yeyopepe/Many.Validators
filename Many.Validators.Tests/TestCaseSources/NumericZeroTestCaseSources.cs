@@ -2,7 +2,6 @@
 
 namespace Many.Validators.Tests.TestCaseSources
 {
-    //TODO: Nullable types
     internal class NumericZeroTestCaseSources
     {
         public static readonly Int16[] Int16 =
