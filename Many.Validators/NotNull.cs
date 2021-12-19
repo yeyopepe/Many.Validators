@@ -7,17 +7,11 @@ namespace Many.Validators
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
     /// <exception cref="ArgumentNullException"></exception>
-    public sealed class NotNull<V>
+    public sealed class NotNull<V>:BaseClass<V>
     {
-        /// <summary>
-        /// Gets the value
-        /// </summary>
-        public V Value { get; private set; }
         public NotNull(V value)
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
-
+            ThrowExceptionIfNull(value);
             this.Value = value;
         }
 
@@ -36,14 +30,8 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(NotNull<V> value)
         {
-#if NET5_0_OR_GREATER
-            return value.Value ?? throw new ArgumentNullException(nameof(value));
-#else
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ThrowExceptionIfNull(value);
             return value.Value;
-#endif
-
         }
 
         /// <summary>
@@ -73,26 +61,6 @@ namespace Many.Validators
         {
             return !source.Equals(other);
         }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return Value != null ?
-                Value.ToString() :
-                String.Empty;
-        }
-        /// <summary>
-        /// Serves as the default hash function.
-        /// </summary>
-        /// <returns>A hash code for the current object.</returns>
-        public override int GetHashCode()
-        {
-            return Value != null ?
-                Value.GetHashCode() :
-                0;
-        }
+     
     }
 }

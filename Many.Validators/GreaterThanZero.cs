@@ -9,13 +9,8 @@ namespace Many.Validators
     /// <typeparam name="V">Underlying value type</typeparam>
     /// <see cref="Validate(V)"/>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public sealed class GreaterThanZero<V>
+    public sealed class GreaterThanZero<V>:BaseClass<V>
     {
-        /// <summary>
-        /// Gets the value
-        /// </summary>
-        public V Value { get; private set; }
-
         public GreaterThanZero(V value)
         {
             Validate(value);
@@ -37,8 +32,7 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(GreaterThanZero<V> value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ThrowExceptionIfNull(value);
             return value.Value;
         }
 
@@ -46,8 +40,7 @@ namespace Many.Validators
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void Validate(V value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ThrowExceptionIfNull(value);
 
             var result = false;
             var t = typeof(V);
@@ -112,27 +105,6 @@ namespace Many.Validators
         {
             return !source.Equals(other);
         }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return Value != null ?
-                Value.ToString() :
-                String.Empty;
-        }
-        /// <summary>
-        /// Serves as the default hash function.
-        /// </summary>
-        /// <returns>A hash code for the current object.</returns>
-        public override int GetHashCode()
-        {
-            return Value != null ?
-                Value.GetHashCode() :
-                0;
-        }
-
+      
     }
 }

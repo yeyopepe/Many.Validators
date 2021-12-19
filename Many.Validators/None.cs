@@ -6,13 +6,8 @@ namespace Many.Validators
     /// Non-validations type. Only for test porpuse
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
-    internal class None<V>
+    internal class None<V>:BaseClass<V>
     {
-        /// <summary>
-        /// Gets the value
-        /// </summary>
-        public V Value { get; private set; }
-
         public None(V value)
         {
             //Nothing to do
@@ -33,8 +28,7 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException"></exception>
         public static implicit operator V(None<V> value)
         {
-            if (value is null)
-                throw new ArgumentNullException(nameof(value));
+            ThrowExceptionIfNull(value);
             return value.Value;
         }
 
@@ -65,26 +59,6 @@ namespace Many.Validators
         {
             return !source.Equals(other);
         }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return Value != null ?
-                Value.ToString() :
-                String.Empty;
-        }
-        /// <summary>
-        /// Serves as the default hash function.
-        /// </summary>
-        /// <returns>A hash code for the current object.</returns>
-        public override int GetHashCode()
-        {
-            return Value != null ?
-                Value.GetHashCode() :
-                0;
-        }
+       
     }
 }
