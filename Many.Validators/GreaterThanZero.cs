@@ -19,35 +19,6 @@ namespace Many.Validators
             this.Value = value;
             Validate(value);
         }
-
-        /// <summary>
-        /// Implicit conversion method from <see cref="V"/> to current
-        /// </summary>
-        /// <param name="value">Underlying value</param>
-        public static implicit operator GreaterThanZero<V>(V value)
-        {
-            return new GreaterThanZero<V>(value);
-        }
-        /// <summary>
-        /// Implicit conversion method from current to <see cref="V"/>
-        /// </summary>
-        /// <param name="value">Current value</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator V(GreaterThanZero<V> value)
-        {
-            value.ThrowExceptionIfNull<GreaterThanZero<V>, V>();
-            return value.Value;
-        }
-
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideEquals<GreaterThanZero<V>, V>(obj);
-        public static bool operator ==(object source, GreaterThanZero<V> other) => source.Equals(other);
-        public static bool operator !=(object source, GreaterThanZero<V> other) => !source.Equals(other);
-        /// <inheritdoc/>
-        public override string ToString() => Value.OverrideToString();
-        /// <inheritdoc/>
-        public override int GetHashCode() => Value.OverrideGetHashCode();
-
         /// <inheritdoc/>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void Validate(V value)
@@ -83,12 +54,42 @@ namespace Many.Validators
                 result = Half.Parse(value.ToString()) > (Half)0;
 #endif
             else
-                throw new ArgumentException(value.GetExceptionMessage<GreaterThanZero<V>,V>("can not be evaluated because type is not recognized ({t})"));
+                throw new ArgumentException(value.GetExceptionMessage<GreaterThanZero<V>, V>("can not be evaluated because type is not recognized ({t})"));
 
             if (!result)
                 throw new ArgumentOutOfRangeException(value.GetExceptionMessage<GreaterThanZero<V>, V>("must be greater than zer"));
         }
 
+        #region Converters and operators
+        /// <summary>
+        /// Implicit conversion method from <see cref="V"/> to current
+        /// </summary>
+        /// <param name="value">Underlying value</param>
+        public static implicit operator GreaterThanZero<V>(V value)
+        {
+            return new GreaterThanZero<V>(value);
+        }
+        /// <summary>
+        /// Implicit conversion method from current to <see cref="V"/>
+        /// </summary>
+        /// <param name="value">Current value</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static implicit operator V(GreaterThanZero<V> value)
+        {
+            value.ThrowExceptionIfNull<GreaterThanZero<V>, V>();
+            return value.Value;
+        }
+        public static bool operator ==(object source, GreaterThanZero<V> other) => source.Equals(other);
+        public static bool operator !=(object source, GreaterThanZero<V> other) => !source.Equals(other);
+        #endregion Converters and operators
 
+        #region Overrides
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this.Value.OverrideEquals<GreaterThanZero<V>, V>(obj);
+        /// <inheritdoc/>
+        public override string ToString() => Value.OverrideToString();
+        /// <inheritdoc/>
+        public override int GetHashCode() => Value.OverrideGetHashCode();
+        #endregion Overrides
     }
 }

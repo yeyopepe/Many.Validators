@@ -17,6 +17,7 @@ namespace Many.Validators
             this.Value = value;
         }
 
+        #region Converters and operators
         /// <summary>
         /// Implicit conversion method from <see cref="V"/> to current
         /// </summary>
@@ -35,14 +36,18 @@ namespace Many.Validators
             value.ThrowExceptionIfNull<None<V>, V>();
             return value.Value;
         }
-
-        /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideEquals<None<V>, V>(obj);
         public static bool operator ==(object source, None<V> other) => source.Equals(other);
         public static bool operator !=(object source, None<V> other) => !source.Equals(other);
+
+        #endregion Converters and operators
+
+        #region Overrides
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this.Value.OverrideEquals<None<V>, V>(obj);
         /// <inheritdoc/>
         public override string ToString() => Value.OverrideToString();
         /// <inheritdoc/>
         public override int GetHashCode() => Value.OverrideGetHashCode();
+        #endregion Overrides
     }
 }

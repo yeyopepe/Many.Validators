@@ -8,10 +8,10 @@ namespace Many.Validators.Benchmark.Benchmarks
     [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60, warmupCount: 1)]
     [MemoryDiagnoser]
     [MedianColumn]
-    [IterationCount(2)]
-    public class NotNullValidatorNullableIntBenchmark : ValidatorBenchmarkBase<int?>
+    [IterationCount(3)]
+    public class NotNullValidatorNullableClassBenchmark : ValidatorBenchmarkBase<string>
     {
-        public NotNullValidatorNullableIntBenchmark() : base(124)
+        public NotNullValidatorNullableClassBenchmark() : base("something")
         {
         }
     }
