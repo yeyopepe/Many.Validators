@@ -57,40 +57,40 @@ namespace Many.Validators.Tests
         [TestCaseSource(typeof(NumericPositiveTestCaseSources), nameof(NumericPositiveTestCaseSources.Half))]
         [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Half))]
 #endif
-        public void GreaterOrEqualThanZero_ReturnsValue<V>(V value)
+        public void GreaterOrEqualThanZero_ReturnsValue<TValue>(TValue value)
         {
-            CreateValidator_ValidValues_ReturnsValue<PositiveOrZero<V>,V>(value);
+            CreateValidator_ValidValues_ReturnsValue<PositiveOrZero<TValue>,TValue>(value);
         }
 
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Int16))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Int32))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Int64))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.SByte))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Double))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Single))]
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Decimal))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Int16))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Int32))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Int64))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.SByte))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Double))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Single))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Decimal))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int16))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int32))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int64))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.SByte))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Double))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Single))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Decimal))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Int16))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Int32))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Int64))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.SByte))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Double))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Single))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Decimal))]
 #if NET5_0_OR_GREATER
-        [TestCaseSource(typeof(NumericRangeNegativeTestCaseSources), nameof(NumericRangeNegativeTestCaseSources.Half))]
-        [TestCaseSource(typeof(NullableNumericRangeNegativeTestCaseSources), nameof(NullableNumericRangeNegativeTestCaseSources.Half))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Half))]
+        [TestCaseSource(typeof(NullableNumericNegativeTestCaseSources), nameof(NullableNumericNegativeTestCaseSources.Half))]
 #endif
-        public void LowerThanZero_ReturnsException<V>(V value)
+        public void LowerThanZero_ReturnsException<TValue>(TValue value)
         {
-            CreateValidator_InvalidValues_ThrowsException<PositiveOrZero<V>, V, ArgumentOutOfRangeException>(value);
+            CreateValidator_InvalidValues_ThrowsException<PositiveOrZero<TValue>, TValue, ArgumentOutOfRangeException>(value);
         }
 
         #region Implicit conversion
         [TestCaseSource(typeof(NumericPositiveTestCaseSources), nameof(NumericPositiveTestCaseSources.Int16))]
         [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Int16))]
-        public void ImplicitConversion_ReturnsUnderlyingType<V>(V value)
+        public void ImplicitConversion_ReturnsUnderlyingType<TValue>(TValue value)
         {
-            ImplicitConversion_ReturnsUnderlyingType(typeof(Positive<V>), value);
+            ImplicitConversion_ReturnsUnderlyingType(typeof(PositiveOrZero<TValue>), value);
         }       
         #endregion Implicit conversion
     }

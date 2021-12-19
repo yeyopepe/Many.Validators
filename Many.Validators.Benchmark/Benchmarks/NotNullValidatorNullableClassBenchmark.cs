@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System;
 
 namespace Many.Validators.Benchmark.Benchmarks
 {

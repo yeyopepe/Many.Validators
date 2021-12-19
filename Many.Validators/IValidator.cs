@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Many.Validators
+﻿namespace Many.Validators
 {
-    public interface IValidator<V>
+    /// <summary>
+    /// Represents a validator
+    /// </summary>
+    /// <typeparam name="TValue">Underlying value type</typeparam>
+    public interface IValidator<TValue>
     {
         /// <summary>
         /// Gets the value
         /// </summary>
-        V Value { get; }
+        TValue Value { get; }
     }
 }

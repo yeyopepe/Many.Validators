@@ -113,7 +113,7 @@ namespace Many.Validators.Benchmark.Implementations
 #endif
 
 
-        public static void Validate1<V>(V value)
+        public static void Validate1<TValue>(TValue value)
         {
             //First iteration to support all types adn write as less code as possible including Half
             //String representation without notation signs
@@ -136,11 +136,11 @@ namespace Many.Validators.Benchmark.Implementations
 
             //Ok
         }
-        public static void Validate2<V>(V value)
+        public static void Validate2<TValue>(TValue value)
         {
             //Second iteration looking for better performance
             var result = false;
-            var t = typeof(V);
+            var t = typeof(TValue);
             if (t.Equals(typeof(Int16)))
                 result = Int16.Parse(value.ToString()) > 0;
             else if (t.Equals(typeof(Int32)))

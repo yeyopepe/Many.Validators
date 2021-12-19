@@ -5,11 +5,11 @@ namespace Many.Validators.Benchmark.Benchmarks
 {
     
 
-    public abstract class ValidatorBenchmarkBase<V>
+    public abstract class ValidatorBenchmarkBase<TValue>
     {
-        public readonly V _argumentsWhenNull;
-        public readonly V _argumentsWhenNotNull;
-        public ValidatorBenchmarkBase(V argumentsWhenNotNull)
+        public readonly TValue _argumentsWhenNull;
+        public readonly TValue _argumentsWhenNotNull;
+        public ValidatorBenchmarkBase(TValue argumentsWhenNotNull)
         {
             _argumentsWhenNotNull = argumentsWhenNotNull;
         }
@@ -42,7 +42,7 @@ namespace Many.Validators.Benchmark.Benchmarks
         {
             try
             {
-                ValidatorImplementation(new NotNull<V>(_argumentsWhenNull));
+                ValidatorImplementation(new NotNull<TValue>(_argumentsWhenNull));
             }
             catch { return; }
 
@@ -54,16 +54,16 @@ namespace Many.Validators.Benchmark.Benchmarks
         [Benchmark]
         public void Success_WithValidator_Conversion() => ValidatorImplementation(_argumentsWhenNotNull);
         [Benchmark]
-        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new NotNull<V>(_argumentsWhenNotNull));
+        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new NotNull<TValue>(_argumentsWhenNotNull));
 
-        private static void WithNoValidatorImplementation(V notNullValue)
+        private static void WithNoValidatorImplementation(TValue notNullValue)
         {
             if (notNullValue == null)
                 throw new ArgumentNullException(nameof(notNullValue));
 
             return;
         }
-        private static void ValidatorImplementation(NotNull<V> notNullValue)
+        private static void ValidatorImplementation(NotNull<TValue> notNullValue)
         {
             return;
         }

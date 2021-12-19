@@ -1,32 +1,33 @@
 ﻿using System;
-using System.Linq;
 
 namespace Many.Validators
 {
     /// <summary>
     /// Numeric validation type to check if a number is greater or equal than zero
     /// </summary>
-    /// <typeparam name="V">Underlying value type</typeparam>
-    /// <see cref="Validate(V)"/>
+    /// <typeparam name="TValue">Underlying value type</typeparam>
+    /// <see cref="Validate(TValue)"/>
+    /// <exception cref="InvalidCastException"></exception>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public readonly struct PositiveOrZero<V>:IValidator<V>
+    public readonly struct PositiveOrZero<TValue>:IValidator<TValue>
     {
         /// <inheritdoc/>
-        public V Value { get; }
+        public TValue Value { get; }
 
-        public PositiveOrZero(V value)
+        public PositiveOrZero(TValue value)
         {
             this.Value = value;
             Validate(value);
         }
         /// <inheritdoc/>
+        /// <exception cref="InvalidCastException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private void Validate(V value)
+        private void Validate(TValue value)
         {
-            value.ThrowExceptionIfNull<PositiveOrZero<V>, V>();
+            value.ThrowExceptionIfNull<PositiveOrZero<TValue>, TValue>();
 
             var result = false;
-            var t = typeof(V);
+            var t = typeof(TValue);
             if (t.Equals(typeof(Int16)) || t.Equals(typeof(Int16?)))
                 result = Int16.Parse(value.ToString()) >= 0;
             else if (t.Equals(typeof(Int32)) || t.Equals(typeof(Int32?)))
@@ -54,38 +55,38 @@ namespace Many.Validators
                 result = Half.Parse(value.ToString()) >= (Half)0;
 #endif
             else
-                throw new ArgumentException(value.GetExceptionMessage<PositiveOrZero<V>, V>("can not be evaluated because type is not recognized ({t})"));
+                throw new InvalidCastException(value.GetExceptionMessage<PositiveOrZero<TValue>, TValue>("can not be evaluated because type is not recognized ({t})"));
 
             if (!result)
-                throw new ArgumentOutOfRangeException(value.GetExceptionMessage<PositiveOrZero<V>, V>("must be greater or equal than zero"));
+                throw new ArgumentOutOfRangeException(value.GetExceptionMessage<PositiveOrZero<TValue>, TValue>("must be greater or equal than zero"));
         }
 
         #region Converters and operators
         /// <summary>
-        /// Implicit conversion method from <see cref="V"/> to current
+        /// Implicit conversion method from <see cref="TValue"/> to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator PositiveOrZero<V>(V value)
+        public static implicit operator PositiveOrZero<TValue>(TValue value)
         {
-            return new PositiveOrZero<V>(value);
+            return new PositiveOrZero<TValue>(value);
         }
         /// <summary>
-        /// Implicit conversion method from current to <see cref="V"/>
+        /// Implicit conversion method from current to <see cref="TValue"/>
         /// </summary>
         /// <param name="value">Current value</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator V(PositiveOrZero<V> value)
+        public static implicit operator TValue(PositiveOrZero<TValue> value)
         {
-            value.ThrowExceptionIfNull<PositiveOrZero<V>, V>();
+            value.ThrowExceptionIfNull<PositiveOrZero<TValue>, TValue>();
             return value.Value;
         }
-        public static bool operator ==(object source, PositiveOrZero<V> other) => source.Equals(other);
-        public static bool operator !=(object source, PositiveOrZero<V> other) => !source.Equals(other);
+        public static bool operator ==(object source, PositiveOrZero<TValue> other) => source.Equals(other);
+        public static bool operator !=(object source, PositiveOrZero<TValue> other) => !source.Equals(other);
         #endregion Converters and operators
 
         #region Overrides
         /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideEquals<PositiveOrZero<V>, V>(obj);
+        public override bool Equals(object obj) => this.Value.OverrideEquals<PositiveOrZero<TValue>, TValue>(obj);
         /// <inheritdoc/>
         public override string ToString() => Value.OverrideToString();
         /// <inheritdoc/>

@@ -1,62 +1,117 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Many.Validators
 {
     internal static class Extensions
     {
-        public static string OverrideToString<V>(this V value)
+        /// <summary>
+        /// Overrides validator's ToString() method
+        /// </summary>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <returns>String representation</returns>
+        public static string OverrideToString<TValue>(this TValue value)
         {
             return value != null ?
                value.ToString() :
                String.Empty;
         }
-
-        public static int OverrideGetHashCode<V>(this V value)
+        /// <summary>
+        /// Overrides validator's GetHashCode() method
+        /// </summary>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <returns>Object's HashCode</returns>
+        public static int OverrideGetHashCode<TValue>(this TValue value)
         {
             return value != null ?
                value.GetHashCode() :
                0;
         }
-
-        public static bool OverrideEquals<T,V>(this V value, object obj)
-            where T: IValidator<V>
+        /// <summary>
+        /// Overrides validator's Equals() method
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <param name="obj"></param>
+        /// <returns>True if the objects are considered equal; otherwise, false. 
+        /// If both value and objB are null, the method returns true.</returns>
+        public static bool OverrideEquals<TValidator,TValue>(this TValue value, object obj)
+            where TValidator: IValidator<TValue>
         {
             bool? comparison;
-            if (obj is V)
-                comparison = value?.Equals(((V)obj));
-            else if (obj == null ||
-                !(obj is T))
+            if (obj is TValue)
+                comparison = value?.Equals(((TValue)obj));
+            else if (obj == null)
+                return true;
+            else if (!(obj is TValidator))
                 return false;
             else
-                comparison = value?.Equals(((T)obj).Value);
+                comparison = value?.Equals(((TValidator)obj).Value);
 
             return comparison.HasValue && comparison.Value;
         }
 
-        public static void ThrowExceptionIfNull<T, V>(this V value)
-            where T : IValidator<V>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static void ThrowExceptionIfNull<TValidator, TValue>(this TValue value)
+            where TValidator : IValidator<TValue>
         {
             if (value == null)
-                throw new ArgumentNullException(value.GetExceptionMessage<T, V>("can not be null"));
+                throw new ArgumentNullException(value.GetExceptionMessage<TValidator, TValue>("can not be null"));
         }
-        public static void ThrowExceptionIfNull<T, V>(this T value)
-           where T : IValidator<V>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static void ThrowExceptionIfNull<TValidator, TValue>(this TValidator value)
+           where TValidator : IValidator<TValue>
         {
             if (value == null)
-                throw new ArgumentNullException(value.GetExceptionMessage<T, V>("can not be null"));
+                throw new ArgumentNullException(value.GetExceptionMessage<TValidator, TValue>("can not be null"));
         }
 
-        public static string GetExceptionMessage<T, V>(this V value, string reasonOfError)
-            where T : IValidator<V>
-            => $"Validator {GetValidatorInfo<T, V>()}: value '{value}' {reasonOfError}";
-        public static string GetExceptionMessage<T, V>(this T value, string reasonOfError)
-            where T : IValidator<V>
-            => $"Validator {GetValidatorInfo<T, V>()}: value '{value}' {reasonOfError}";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <param name="reasonOfError"></param>
+        /// <returns></returns>
+        public static string GetExceptionMessage<TValidator, TValue>(this TValue value, string reasonOfError)
+            where TValidator : IValidator<TValue>
+            => $"Validator {GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
 
-        private static string GetValidatorInfo<T, V>()
-            where T : IValidator<V>
-            => $"{typeof(T).Name} of {typeof(V).Name}";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="value"></param>
+        /// <param name="reasonOfError"></param>
+        /// <returns></returns>
+        public static string GetExceptionMessage<TValidator, TValue>(this TValidator value, string reasonOfError)
+            where TValidator : IValidator<TValue>
+            => $"Validator {GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValidator">Validator type</typeparam>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <returns></returns>
+        private static string GetValidatorInfo<TValidator, TValue>()
+            where TValidator : IValidator<TValue>
+            => $"{typeof(TValidator).Name} of {typeof(TValue).Name}";
     }
 }

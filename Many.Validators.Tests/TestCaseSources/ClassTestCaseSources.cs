@@ -10,7 +10,7 @@
         {
             null
         };
-        public static readonly string[] Emtpy =
+        public static readonly string[] Empty =
         {
             "",
             " "

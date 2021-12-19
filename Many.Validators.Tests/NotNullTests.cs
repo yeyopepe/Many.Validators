@@ -13,28 +13,28 @@ namespace Many.Validators.Tests
         {
             CreateValidator_InvalidValues_ThrowsException<NotNull<string>, string, ArgumentNullException>(value);
         }
-        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Emtpy))]
+        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Empty))]
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
-        public void NonNullValue_ReturnsValue(string value)
+        public void NotNullValue_ReturnsValue(string value)
         {
-            NonNullValue_ReturnsValue<string>(value);
+            NotNullValue_ReturnsValue<string>(value);
         }
         #endregion Class
 
         #region Struct
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
         [TestCaseSource(typeof(StructTestCaseSources), nameof(StructTestCaseSources.NotEmpty))]
-        public void NonNullValue_ReturnsValue(int value)
+        public void NotNullValue_ReturnsValue(int value)
         {
-            NonNullValue_ReturnsValue<int>(value);
+            NotNullValue_ReturnsValue<int>(value);
         }
         #endregion Struct
 
         #region Nullable
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.NotEmpty))]
-        public void NonNullValue_ReturnsValue<V>(V value)
+        public void NotNullValue_ReturnsValue<TValue>(TValue value)
         {
-            CreateValidator_ValidValues_ReturnsValue<NotNull<V>, V>(value);
+            CreateValidator_ValidValues_ReturnsValue<NotNull<TValue>, TValue>(value);
         }
 
         [TestCaseSource(typeof(NullableTestCaseSources), nameof(NullableTestCaseSources.Null))]
@@ -62,6 +62,26 @@ namespace Many.Validators.Tests
         }
         #endregion Implicit conversion
 
-      
+        #region Overrides
+        public void EqualValues_ReturnsTrue(string value)
+        {
+            NotNull<string> a = value;
+            Assert.IsTrue(a.Equals(value));
+        }
+        public void EqualValues_ReturnsTrue(int value)
+        {
+            NotNull<int> a = value;
+            Assert.IsTrue(a.Equals(value));
+        }
+        public void EqualValues_ReturnsTrue(int? value)
+        {
+            NotNull<int?> a = value;
+            Assert.IsTrue(a.Equals(value));
+        }
+        public void NotEqualValues_ReturnsTrue()
+        {
+        }
+
+        #endregion Overrides
     }
 }
