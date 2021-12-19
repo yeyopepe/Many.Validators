@@ -3,13 +3,11 @@ using System;
 
 namespace Many.Validators.Benchmark.Benchmarks
 {
-    
-
-    public abstract class ValidatorBenchmarkBase<TValue>
+    public abstract class NotNullValidatorBenchmarkBase<TValue>
     {
         public readonly TValue _argumentsWhenNull;
         public readonly TValue _argumentsWhenNotNull;
-        public ValidatorBenchmarkBase(TValue argumentsWhenNotNull)
+        public NotNullValidatorBenchmarkBase(TValue argumentsWhenNotNull)
         {
             _argumentsWhenNotNull = argumentsWhenNotNull;
         }
@@ -56,16 +54,16 @@ namespace Many.Validators.Benchmark.Benchmarks
         [Benchmark]
         public void Success_WithValidator_NoConversion() => ValidatorImplementation(new NotNull<TValue>(_argumentsWhenNotNull));
 
-        private static void WithNoValidatorImplementation(TValue notNullValue)
+        private static TValue WithNoValidatorImplementation(TValue value)
         {
-            if (notNullValue == null)
-                throw new ArgumentNullException(nameof(notNullValue));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
-            return;
+            return value;
         }
-        private static void ValidatorImplementation(NotNull<TValue> notNullValue)
+        private static TValue ValidatorImplementation(NotNull<TValue> value)
         {
-            return;
+            return value;
         }
     }
 }

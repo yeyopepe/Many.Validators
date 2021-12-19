@@ -11,8 +11,9 @@ namespace Many.Validators.Benchmark
 
             //var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
 
-            var summary1 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorNullableClassBenchmark>();
+            //var summary1 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorNullableClassBenchmark>();
             //var summary2 = BenchmarkRunner.Run<Benchmarks.NotNullValidatorNullableStructBenchmark>();
+            var summary3 = BenchmarkRunner.Run<Benchmarks.NotNullOrEmptyValidatorBenchmark>();
 
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
         }

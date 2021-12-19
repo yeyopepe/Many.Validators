@@ -8,7 +8,7 @@ namespace Many.Validators.Benchmark.Benchmarks
     [MemoryDiagnoser]
     [MedianColumn]
     [IterationCount(3)]
-    public class NotNullValidatorNullableStructBenchmark : ValidatorBenchmarkBase<int?>
+    public class NotNullValidatorNullableStructBenchmark : NotNullValidatorBenchmarkBase<int?>
     {
         public NotNullValidatorNullableStructBenchmark() : base(124)
         {

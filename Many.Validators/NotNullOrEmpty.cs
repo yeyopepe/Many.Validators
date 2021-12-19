@@ -3,30 +3,30 @@
 namespace Many.Validators
 {
     /// <summary>
-    /// Validation type to check if value is set (not null) but is empty
+    /// Validation type to check if value is null or empty
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="ArgumentNullException"></exception>
-    public readonly struct NotEmpty: IValidator<string>
+    /// <exception cref="ArgumentException">Value is empty</exception>
+    /// <exception cref="ArgumentNullException">Value is null</exception>
+    public readonly struct NotNullOrEmpty: IValidator<string>
     {
         /// <inheritdoc/>
         public string Value { get; }
 
-        public NotEmpty(string value)
+        public NotNullOrEmpty(string value)
         {
             this.Value = value;
             Validate(value);
         }
         /// <inheritdoc/>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException">Value is empty</exception>
+        /// <exception cref="ArgumentNullException">Value is null</exception>
         private void Validate(string value)
         {
-            value.ThrowExceptionIfNull<Negative<string>, string>();
+            value.ThrowExceptionIfNull<NotNullOrEmpty, string>();
             
             if (string.IsNullOrWhiteSpace(value)) //In this point value can not be null because ThrowExceptionIfNull
-                throw new ArgumentException(value.GetExceptionMessage<NotEmpty, string>("must have a value"));
+                throw new ArgumentException(value.GetExceptionMessage<NotNullOrEmpty, string>("must have a value"));
         }
 
         #region Converters and operators
@@ -34,27 +34,27 @@ namespace Many.Validators
         /// Implicit conversion method from string to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator NotEmpty(string value)
+        public static implicit operator NotNullOrEmpty(string value)
         {
-            return new NotEmpty(value);
+            return new NotNullOrEmpty(value);
         }
         /// <summary>
         /// Implicit conversion method from current to <see cref="V"/>
         /// </summary>
         /// <param name="value">Current value</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator string(NotEmpty value)
+        public static implicit operator string(NotNullOrEmpty value)
         {
-            value.ThrowExceptionIfNull<NotEmpty, string>();
+            value.ThrowExceptionIfNull<NotNullOrEmpty, string>();
             return value.Value;
         }
-        public static bool operator ==(object source, NotEmpty other) => source.Equals(other);
-        public static bool operator !=(object source, NotEmpty other) => !source.Equals(other);
+        public static bool operator ==(object source, NotNullOrEmpty other) => source.Equals(other);
+        public static bool operator !=(object source, NotNullOrEmpty other) => !source.Equals(other);
         #endregion Converters and operators
 
         #region Overrides
         /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideEquals<NotEmpty, string>(obj);
+        public override bool Equals(object obj) => this.Value.OverrideEquals<NotNullOrEmpty, string>(obj);
         /// <inheritdoc/>
         public override string ToString() => Value.OverrideToString();
         /// <inheritdoc/>

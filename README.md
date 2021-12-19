@@ -22,14 +22,14 @@ I focused on:
 
 ### Built-int validators 
 
-|Validator              |Implemented|Benchmarked|Version
-|-----------------------|:---------:|:---------:|:-------:
-|NotNull<>              |✅         |✅        |0.9.0
-|NotEmpty< string>      |✅         |❌        |0.9.0
-|Positive<>             |✅         |❌        |0.9.0
-|PositiveOrZero<>       |✅         |❌        |0.9.0
-|Negative<>             |✅         |❌        |0.9.0
-|NegativeOrZero<>       |✅         |❌        |0.9.0
+|Validator                    |Implemented|Benchmarked|Version
+|-----------------------------|:---------:|:---------:|:-------:
+|NotNull<>                    |✅         |✅        |0.9.0
+|NotNullOrEmpty< string>      |✅         |✅        |0.9.0
+|Positive<>                   |✅         |❌        |0.9.0
+|PositiveOrZero<>             |✅         |❌        |0.9.0
+|Negative<>                   |✅         |❌        |0.9.0
+|NegativeOrZero<>             |✅         |❌        |0.9.0
 
 
 <br/>
