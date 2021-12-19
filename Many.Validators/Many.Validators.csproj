@@ -7,4 +7,10 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="HiddenDrafts\**" />
+    <EmbeddedResource Remove="HiddenDrafts\**" />
+    <None Remove="HiddenDrafts\**" />
+  </ItemGroup>
+
 </Project>

@@ -6,9 +6,14 @@ namespace Many.Validators
     /// Non-validations type. Only for test porpuse
     /// </summary>
     /// <typeparam name="V">Underlying value type</typeparam>
-    internal class None<V>: ValidatorTypeBase<V>
+    internal class None<V>
     {
-        public None(V value):base(value)
+        /// <summary>
+        /// Gets the value
+        /// </summary>
+        public V Value { get; private set; }
+
+        public None(V value)
         {
             //Nothing to do
         }
@@ -33,10 +38,53 @@ namespace Many.Validators
             return value.Value;
         }
 
-        /// <inheritdoc/>
-        protected override void Validate(V value)
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public override bool Equals(object obj)
         {
-            //Nothing to do
+            bool? comparison;
+            if (obj is V)
+                comparison = this.Value?.Equals(((V)obj));
+            else if (obj == null ||
+                !(obj is None<V>))
+                return false;
+            else
+                comparison = this.Value?.Equals(((None<V>)obj).Value);
+
+            return comparison.HasValue && comparison.Value;
+        }
+
+        public static bool operator ==(object source, None<V> other)
+        {
+            return source.Equals(other);
+        }
+        public static bool operator !=(object source, None<V> other)
+        {
+            return !source.Equals(other);
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
+        public override string ToString()
+        {
+            return Value != null ?
+                Value.ToString() :
+                String.Empty;
+        }
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        /// <returns>A hash code for the current object.</returns>
+        public override int GetHashCode()
+        {
+            return Value != null ?
+                Value.GetHashCode() :
+                0;
         }
     }
 }

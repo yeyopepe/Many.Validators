@@ -9,11 +9,17 @@ namespace Many.Validators
     /// <typeparam name="V">Underlying value type</typeparam>
     /// <see cref="Validate(V)"/>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public sealed class GreaterThanZero<V>: ValidatorTypeBase<V>
+    public sealed class GreaterThanZero<V>
     {
-        public GreaterThanZero(V value) : base(value)
+        /// <summary>
+        /// Gets the value
+        /// </summary>
+        public V Value { get; private set; }
+
+        public GreaterThanZero(V value)
         {
-            //Nothing to do
+            Validate(value);
+            Value = value;
         }
 
         /// <summary>
@@ -38,9 +44,10 @@ namespace Many.Validators
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        protected override void Validate(V value)
+        private void Validate(V value)
         {
-            base.Validate(value);
+            if (value is null)
+                throw new ArgumentNullException(nameof(value));
 
             var result = false;
             var t = typeof(V);
@@ -75,6 +82,56 @@ namespace Many.Validators
 
             if (!result)
                 throw new ArgumentOutOfRangeException($"Value {value} must be greater than zero.");
+        }
+
+
+        /// <summary>
+        /// Determines whether the specified object is equal to the current object.
+        /// </summary>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            bool? comparison;
+            if (obj is V)
+                comparison = this.Value?.Equals(((V)obj));
+            else if (obj == null ||
+                !(obj is GreaterThanZero<V>))
+                return false;
+            else
+                comparison = this.Value?.Equals(((GreaterThanZero<V>)obj).Value);
+
+            return comparison.HasValue && comparison.Value;
+        }
+
+        public static bool operator ==(object source, GreaterThanZero<V> other)
+        {
+            return source.Equals(other);
+        }
+        public static bool operator !=(object source, GreaterThanZero<V> other)
+        {
+            return !source.Equals(other);
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
+        public override string ToString()
+        {
+            return Value != null ?
+                Value.ToString() :
+                String.Empty;
+        }
+        /// <summary>
+        /// Serves as the default hash function.
+        /// </summary>
+        /// <returns>A hash code for the current object.</returns>
+        public override int GetHashCode()
+        {
+            return Value != null ?
+                Value.GetHashCode() :
+                0;
         }
 
     }
