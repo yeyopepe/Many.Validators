@@ -44,6 +44,7 @@ namespace Many.Validators
 
             var result = false;
             var t = typeof(V);
+            //TODO: Nullable types
             if (t.Equals(typeof(Int16)))
                 result = Int16.Parse(value.ToString()) > 0;
             else if (t.Equals(typeof(Int32)))
