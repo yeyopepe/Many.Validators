@@ -20,13 +20,17 @@ I focused on:
 
 <br/>
 
-### A complete set of Built-int validators 
-- NotNull ✅
-- NotEmpty ❌
-- Positive ✅
-- PositiveOrZero ❌
-- Negative ❌
-- NegativeOrZero ❌
+### Built-int validators 
+
+|Validator            |Implemented|Benchmarked|Version
+|---------------------|:---------:|:---------:|:-------:
+|NotNull              |✅         |✅         |1.0.0
+|NotEmpty             |❌         |❌         |1.0.0
+|Positive             |✅         |❌         |1.0.0
+|PositiveOrZero       |✅         |❌         |1.0.0
+|Negative             |❌         |❌         |1.0.0
+|NegativeOrZero       |❌         |❌         |1.0.0
+
 
 <br/>
 
