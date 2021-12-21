@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
 	<metadata>
 		<id>Many.Validators</id>
 		<title>A set of very-easy-to-read immutable types to add seamless validations in your projects.</title>
@@ -35,4 +35,5 @@
 		<file src="Many.Validators\bin\Release\net60\Many.Validators.*" target="lib\net6.0" />
 		<file src="Many.Validators\bin\Release\net472\Many.Validators.*" target="lib\net472" />
 	</files>
+ 
 </package>
