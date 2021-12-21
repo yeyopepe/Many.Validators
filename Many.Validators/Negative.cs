@@ -1,5 +1,5 @@
 ﻿using System;
-using static Many.Validators.DynamicHelper;
+using static Many.Validators.DynamicObjectsHelper;
 
 namespace Many.Validators
 {
@@ -39,11 +39,11 @@ namespace Many.Validators
             }
             catch
             {
-                throw new InvalidCastException(GetExceptionMessage<Negative<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
+                throw new InvalidCastException(message: GetExceptionMessage<Negative<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
             }
 
             if (!condition)
-                throw new ArgumentOutOfRangeException(GetExceptionMessage<Negative<TValue>, TValue>(value, "must be lower or equal than zero"));
+                throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessage<Negative<TValue>, TValue>(value, "must be lower or equal than zero"));
         }
 
         #region Converters and operators

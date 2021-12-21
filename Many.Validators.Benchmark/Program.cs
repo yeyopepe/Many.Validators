@@ -7,6 +7,9 @@ namespace Many.Validators.Benchmark
     {
         static void Main(string[] args)
         {
+            string z = "true";
+            var temp = Get(z);
+
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
 
             //var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
@@ -27,6 +30,11 @@ namespace Many.Validators.Benchmark
 
             Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
         }
+
+        private static bool Get(NotNull<string> value)
+		{
+            return bool.Parse(value);
+		}
     }
 }
 

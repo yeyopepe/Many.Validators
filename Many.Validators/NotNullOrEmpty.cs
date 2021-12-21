@@ -26,7 +26,7 @@ namespace Many.Validators
             value.ThrowExceptionIfNull<NotNullOrEmpty, string>();
             
             if (string.IsNullOrWhiteSpace(value)) //In this point value can not be null because ThrowExceptionIfNull
-                throw new ArgumentException(value.GetExceptionMessage<NotNullOrEmpty, string>("must have a value"));
+                throw new ArgumentException(paramName: nameof(value), message: value.GetExceptionMessage<NotNullOrEmpty, string>("must have a value"));
         }
 
         #region Converters and operators
