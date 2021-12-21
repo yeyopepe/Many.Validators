@@ -37,7 +37,7 @@ namespace Many.Validators.Tests
             {
                 var validator = Activator.CreateInstance(typeof(TValidator), new object[] { value });
             });
-            Assert.AreEqual(result.InnerException.GetType(), typeof(TException), "Unexpected exception type");
+            Assert.AreEqual(typeof(TException), result.InnerException.GetType(), "Unexpected exception type");
 
             var msgToCheck = $"{typeof(TValidator).Name} of {typeof(TValue).Name}";
             Assert.IsTrue(result.InnerException.Message.Contains(msgToCheck), "Unexpected exception message");

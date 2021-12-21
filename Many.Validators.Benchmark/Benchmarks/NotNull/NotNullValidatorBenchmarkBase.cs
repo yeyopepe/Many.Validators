@@ -1,15 +1,22 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System;
 
-namespace Many.Validators.Benchmark.Benchmarks
+namespace Many.Validators.Benchmark.Benchmarks.NotNull
 {
+    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net472)]
+    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp31)]
+    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60)]
+    [MemoryDiagnoser]
+    [MedianColumn]
+    [IterationCount(3)]
+    [WarmupCount(1)]
     public abstract class NotNullValidatorBenchmarkBase<TValue>
     {
-        public readonly TValue _argumentsWhenNull;
-        public readonly TValue _argumentsWhenNotNull;
+        public readonly TValue _argumentsToFail;
+        public readonly TValue _argumentsToPass;
         public NotNullValidatorBenchmarkBase(TValue argumentsWhenNotNull)
         {
-            _argumentsWhenNotNull = argumentsWhenNotNull;
+            _argumentsToPass = argumentsWhenNotNull;
         }
 
 
@@ -18,7 +25,7 @@ namespace Many.Validators.Benchmark.Benchmarks
         {
             try
             {
-                WithNoValidatorImplementation(_argumentsWhenNull);
+                WithNoValidatorImplementation(_argumentsToFail);
             }
             catch { return; }
 
@@ -29,7 +36,7 @@ namespace Many.Validators.Benchmark.Benchmarks
         {
             try
             {
-                ValidatorImplementation(_argumentsWhenNull);
+                ValidatorImplementation(_argumentsToFail);
             }
             catch { return; }
 
@@ -40,7 +47,7 @@ namespace Many.Validators.Benchmark.Benchmarks
         {
             try
             {
-                ValidatorImplementation(new NotNull<TValue>(_argumentsWhenNull));
+                ValidatorImplementation(new NotNull<TValue>(_argumentsToFail));
             }
             catch { return; }
 
@@ -48,11 +55,11 @@ namespace Many.Validators.Benchmark.Benchmarks
         }
 
         [Benchmark(Baseline = true)]
-        public void Success_WithoutValidator() => WithNoValidatorImplementation(_argumentsWhenNotNull);
+        public void Success_WithoutValidator() => WithNoValidatorImplementation(_argumentsToPass);
         [Benchmark]
-        public void Success_WithValidator_Conversion() => ValidatorImplementation(_argumentsWhenNotNull);
+        public void Success_WithValidator_Conversion() => ValidatorImplementation(_argumentsToPass);
         [Benchmark]
-        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new NotNull<TValue>(_argumentsWhenNotNull));
+        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new NotNull<TValue>(_argumentsToPass));
 
         private static TValue WithNoValidatorImplementation(TValue value)
         {

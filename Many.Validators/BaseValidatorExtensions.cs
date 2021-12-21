@@ -2,7 +2,7 @@
 
 namespace Many.Validators
 {
-    internal static class Extensions
+    internal static class BaseValidatorExtensions
     {
         /// <summary>
         /// Overrides validator's ToString() method
@@ -104,14 +104,10 @@ namespace Many.Validators
             where TValidator : IValidator<TValue>
             => $"Validator {GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TValidator">Validator type</typeparam>
-        /// <typeparam name="TValue">Underlying value type</typeparam>
-        /// <returns></returns>
-        private static string GetValidatorInfo<TValidator, TValue>()
+        public static string GetValidatorInfo<TValidator, TValue>()
             where TValidator : IValidator<TValue>
             => $"{typeof(TValidator).Name} of {typeof(TValue).Name}";
+
+
     }
 }

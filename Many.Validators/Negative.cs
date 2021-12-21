@@ -1,4 +1,5 @@
 ﻿using System;
+using static Many.Validators.DynamicHelper;
 
 namespace Many.Validators
 {
@@ -20,45 +21,29 @@ namespace Many.Validators
             Validate(value);
         }
         /// <inheritdoc/>
-        /// <exception cref="InvalidCastException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private void Validate(TValue value)
+		/// <exception cref="InvalidCastException"></exception>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
+		private void Validate(dynamic value)
         {
-            value.ThrowExceptionIfNull<Negative<TValue>, TValue>();
+            ThrowExceptionIfNull<Negative<TValue>, TValue>(value);
 
-            var result = false;
-            var t = typeof(TValue);
-            if (t.Equals(typeof(Int16)) || t.Equals(typeof(Int16?)))
-                result = Int16.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Int32)) || t.Equals(typeof(Int32?)))
-                result = Int32.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Int64)) || t.Equals(typeof(Int64?)))
-                result = Int64.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(SByte)) || t.Equals(typeof(SByte?)))
-                result = SByte.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(UInt16)) || t.Equals(typeof(UInt16?)))
-                result = UInt16.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(UInt32)) || t.Equals(typeof(UInt32?)))
-                result = UInt32.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(UInt64)) || t.Equals(typeof(UInt64?)))
-                result = UInt64.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Byte)) || t.Equals(typeof(Byte?)))
-                result = Byte.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Single)) || t.Equals(typeof(Single?)))
-                result = Single.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Double)) || t.Equals(typeof(Double?)))
-                result = Double.Parse(value.ToString()) < 0;
-            else if (t.Equals(typeof(Decimal)) || t.Equals(typeof(Decimal?)))
-                result = Decimal.Parse(value.ToString()) < 0;
+            var condition = false;
+            try
+            {
 #if NET5_0_OR_GREATER
-            else if (t.Equals(typeof(Half)) || t.Equals(typeof(Half?)))
-                result = Half.Parse(value.ToString()) < (Half)0;
+                if (value is Half)
+                    condition = value < (Half)0;
+                else
 #endif
-            else
-                throw new InvalidCastException(value.GetExceptionMessage<Negative<TValue>, TValue>("can not be evaluated because type is not recognized ({t})"));
+                    condition = value < 0;
+            }
+            catch
+            {
+                throw new InvalidCastException(GetExceptionMessage<Negative<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
+            }
 
-            if (!result)
-                throw new ArgumentOutOfRangeException(value.GetExceptionMessage<Negative<TValue>, TValue>("must be lower than zero"));
+            if (!condition)
+                throw new ArgumentOutOfRangeException(GetExceptionMessage<Negative<TValue>, TValue>(value, "must be lower or equal than zero"));
         }
 
         #region Converters and operators

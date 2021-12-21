@@ -1,10 +1,9 @@
 ﻿using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
-using System;
 
 namespace Many.Validators.Tests
 {
-    [TestFixture]
+	[TestFixture]
     internal partial class NotNullOrEmptyTests
     {
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.NotEmptyString))]

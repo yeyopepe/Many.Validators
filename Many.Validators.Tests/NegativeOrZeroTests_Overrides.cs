@@ -1,12 +1,9 @@
 ﻿using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Many.Validators.Tests
 {
-    [TestFixture]
+	[TestFixture]
     internal partial class NegativeOrZeroOrZeroTests
     {
         [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative))]
