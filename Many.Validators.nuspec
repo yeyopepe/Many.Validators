@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Many.Validators</id>
 		<title>A set of very-easy-to-read immutable types to add seamless validations in your projects.</title>
-		<version>1.0.2</version>
+		<version>1.0.3</version>
 		<authors>Sergio José Martínez Primiani</authors>
 		<owners>Sergio José Martínez Primiani</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -12,8 +12,9 @@
 		<description>A set of very-easy-to-read immutable types to add seamless validations in your projects.</description>
 		<tags>performance validator conversion error-handling error exceptions exception-handling exception-reporting net60 netstandard netstandard21 net472</tags>
 		<repository type="git" url="https://github.com/yeyopepe/Many.Mocks" />
+		<licenseUrl>https://github.com/yeyopepe/Many.Validators/blob/main/LICENSE</licenseUrl>
 		<releaseNotes>
-			v.1.0.2
+			v.1.0.3
 			- NotNull, NotEmpty, Positive, PositiveOrZero, Negative and NegativeOrZero validators.
 		</releaseNotes>
 		
