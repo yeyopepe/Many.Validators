@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Many.Validators.Statics;
+using System;
 
 namespace Many.Validators
 {

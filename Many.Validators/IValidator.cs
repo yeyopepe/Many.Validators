@@ -3,14 +3,8 @@
     /// <summary>
     /// Represents a validator
     /// </summary>
-    /// <typeparam name="TValue">Underlying value type</typeparam>
-    public interface IValidator<TValue>
+    public interface IValidator
     {
-        /// <summary>
-        /// Gets the value
-        /// </summary>
-        TValue Value { get; }
-
         bool Equals(object obj);
         string ToString();
         int GetHashCode();

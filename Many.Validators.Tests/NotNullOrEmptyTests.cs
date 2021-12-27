@@ -7,9 +7,10 @@ namespace Many.Validators.Tests
     [TestFixture]
     internal partial class NotNullOrEmptyTests: BaseTests
     {
-        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Null))]
-        public void NullValue_ReturnsNullException(string value)
+        [Test]
+        public void NullValue_ReturnsNullException()
         {
+            string value = null;
             CreateValidator_InvalidValues_ThrowsException<NotNullOrEmpty, string, ArgumentNullException>(value);
         }
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Empty))]

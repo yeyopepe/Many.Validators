@@ -1,5 +1,6 @@
-﻿using System;
-using static Many.Validators.DynamicObjectsHelper;
+﻿using Many.Validators.Statics;
+using System;
+using static Many.Validators.Statics.DynamicObjectsHelper;
 
 namespace Many.Validators
 {
@@ -7,7 +8,6 @@ namespace Many.Validators
 	/// Numeric validation type to check if a number is greater than zero
 	/// </summary>
 	/// <typeparam name="TValue">Underlying value type</typeparam>
-	/// <see cref="Validate(TValue)"/>
 	/// <exception cref="InvalidCastException"></exception>
 	/// <exception cref="ArgumentOutOfRangeException"></exception>
 	public readonly struct Positive<TValue> : IValidator<TValue>

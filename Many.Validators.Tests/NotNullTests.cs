@@ -8,9 +8,10 @@ namespace Many.Validators.Tests
     internal partial class NotNullTests: BaseTests
     {
         #region Class
-        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Null))]
-        public void NullValue_ReturnsException(string value)
+        [Test]
+        public void NullValue_ReturnsException()
         {
+            string value = null;
             CreateValidator_InvalidValues_ThrowsException<NotNull<string>, string, ArgumentNullException>(value);
         }
         [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.Empty))]

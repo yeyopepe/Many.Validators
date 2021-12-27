@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections;
 
-namespace Many.Validators
+namespace Many.Validators.Statics
 {
     internal static class BaseValidatorExtensions
     {
@@ -43,14 +44,41 @@ namespace Many.Validators
             bool? comparison;
             if (obj is TValue)
                 comparison = value?.Equals(((TValue)obj));
-            else if (obj == null)
+            else if (obj == null && value == null)
                 return true;
-            else if (!(obj is TValidator))
+            else if (obj == null ||
+                !(obj is TValidator))
                 return false;
             else
                 comparison = value?.Equals(((TValidator)obj).Value);
 
             return comparison.HasValue && comparison.Value;
+        }
+
+        public static bool OverrideIEnumerableEquals<TValidator, TValue>(this TValue value, object obj)
+            where TValidator : IValidator<TValue>
+        {
+            if (obj is IValidator)
+            {
+                var objIEnumerable = (IEnumerable)((TValidator)obj).Value;
+                var objEnumerator = objIEnumerable.GetEnumerator();
+                var valueEnumerator = ((IEnumerable)value).GetEnumerator();
+                objEnumerator.Reset();
+                valueEnumerator.Reset();
+                var result = true;
+                while (result &&
+                        objEnumerator.MoveNext() &&
+                        valueEnumerator.MoveNext())
+                {
+                    if (!objEnumerator.Current.Equals(valueEnumerator.Current))
+                        result = false;
+                };
+                return result;
+            }
+            else if (obj == null && value == null)
+                return true;
+
+            return false;
         }
 
         /// <summary>

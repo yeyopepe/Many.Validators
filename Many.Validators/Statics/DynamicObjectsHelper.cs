@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Many.Validators
+namespace Many.Validators.Statics
 {
 	internal static class DynamicObjectsHelper
 	{
@@ -14,8 +14,8 @@ namespace Many.Validators
         public static void ThrowExceptionIfNull<TValidator, TValue>(dynamic value)
           where TValidator : IValidator<TValue>
         {
-            if (value == null)
-                throw new ArgumentNullException(paramName: nameof(value), message: value.GetExceptionMessage<TValidator, TValue>("can not be null"));
+            if (value is null)
+                throw new ArgumentNullException(paramName: nameof(value), message: GetExceptionMessage<TValidator, TValue>(value, "can not be null"));
         }
 
         /// <summary>
@@ -29,5 +29,7 @@ namespace Many.Validators
         public static string GetExceptionMessage<TValidator, TValue>(dynamic value, string reasonOfError)
            where TValidator : IValidator<TValue>
            => $"Validator {BaseValidatorExtensions.GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
+
+        
     }
 }

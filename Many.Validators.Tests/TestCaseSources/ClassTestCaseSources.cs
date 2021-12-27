@@ -1,4 +1,6 @@
-﻿namespace Many.Validators.Tests.TestCaseSources
+﻿using System.Collections;
+
+namespace Many.Validators.Tests.TestCaseSources
 {
     internal class ClassTestCaseSources
     {
@@ -6,15 +8,20 @@
         {
             "asdf"
         };
-        public static readonly string[] Null = 
+        public static readonly object[] NotEmptyList =
         {
-            null
+            new string[]{ "asdf","asdf"}
         };
         public static readonly string[] Empty =
         {
             "",
             " ",
             "      "
+        };
+        public static readonly object[] EmptyList =
+        {
+           new string[0],
+           new string[] { },
         };
 
     }
