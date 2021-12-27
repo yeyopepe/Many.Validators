@@ -28,7 +28,7 @@ namespace Many.Validators.Statics
         /// <returns>Exception message</returns>
         public static string GetExceptionMessage<TValidator, TValue>(dynamic value, string reasonOfError)
            where TValidator : IValidator<TValue>
-           => $"Validator {BaseValidatorExtensions.GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
+           => $"Validator {ErrorHandlingExtensions.GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
 
         
     }

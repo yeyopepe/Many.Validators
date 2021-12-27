@@ -1,8 +1,6 @@
-﻿using System.Collections;
-
-namespace Many.Validators.Tests.TestCaseSources
+﻿namespace Many.Validators.Tests.TestCaseSources
 {
-    internal class ClassTestCaseSources
+	internal class ClassTestCaseSources
     {
         public static readonly string[] NotEmpty =
         {
