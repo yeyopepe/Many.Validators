@@ -39,11 +39,11 @@ namespace Many.Validators
             }
             catch
             {
-                throw new InvalidCastException(message: GetExceptionMessage<NegativeOrZero<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
+                throw new InvalidCastException(message: GetExceptionMessageForValidator<NegativeOrZero<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
             }
 
             if (!condition)
-                throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessage<NegativeOrZero<TValue>, TValue>(value, "must be lower than zero"));
+                throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageForValidator<NegativeOrZero<TValue>, TValue>(value, "must be lower than zero"));
         }
 
         #region Converters and operators

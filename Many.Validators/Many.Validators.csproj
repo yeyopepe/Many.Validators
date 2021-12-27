@@ -11,9 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="HiddenDrafts\**" />
-    <EmbeddedResource Remove="HiddenDrafts\**" />
-    <None Remove="HiddenDrafts\**" />
+    <Compile Remove="All.cs" />
   </ItemGroup>
 
   <ItemGroup>

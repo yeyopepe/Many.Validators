@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Many.Validators.Range;
+using System;
 
 namespace Many.Validators.Statics
 {
@@ -64,5 +65,13 @@ namespace Many.Validators.Statics
             where TValidator : IValidator<TValue>
             => $"{typeof(TValidator).Name} of {typeof(TValue).Name}";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TValue">Underlying value type</typeparam>
+        /// <param name="rangeType">Range type</param>
+        /// <returns>Validator information</returns>
+        public static string GetRangeInfo<TValue>(Type rangeType)
+            => $"{rangeType.Name} of {typeof(TValue).Name}";
     }
 }

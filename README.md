@@ -26,12 +26,12 @@ I focused on:
 |-------------------------------|:---------:|:------------:|:--------------:
 |NotNull<>                      |✅         |4.3          |1.0.0
 |NotNullOrEmpty< string>        |✅         |1.4          |1.0.0
-|NotNullOrEmptyArray           |✅         |2.0 - 2.3**         |1.1.0
+|NotNullOrEmptyArray<>           |✅         |2.0 - 2.3**         |1.1.0
 |Positive<>                     |✅         |1.3 - 2.1    |1.0.0
 |PositiveOrZero<>               |✅         |1.3 - 2.1    |1.0.0
 |Negative<>                     |✅         |1.3 - 2.1    |1.0.0
 |NegativeOrZero<>               |✅         |1.3 - 2.1    |1.0.0
-|InRange                        |❌          |           |
+|InRange                        |❌          |           |2.0.0
 
  <sub>(*) This column shows the average overhead calculation in the validation-passes scenario that is the most expensive: we need to perform a validation and it passes. **This is a measure of the overhead cost, not the cost itself.**
 <br/>The baseline corresponds to the simplest way to validate each case (copy-pasted IF conditional(s) and manual exception throwing). Data is provided from supported frameworks but in this table the value is from NET60 benchmarks.

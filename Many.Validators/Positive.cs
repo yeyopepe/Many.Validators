@@ -40,11 +40,11 @@ namespace Many.Validators
 			}
 			catch
 			{
-				throw new InvalidCastException(message: GetExceptionMessage<Positive<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
+				throw new InvalidCastException(message: GetExceptionMessageForValidator<Positive<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
 			}
 
 			if (!condition)
-				throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessage<Positive<TValue>, TValue>(value, "must be greater than zero"));
+				throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageForValidator<Positive<TValue>, TValue>(value, "must be greater than zero"));
 		}
 
 

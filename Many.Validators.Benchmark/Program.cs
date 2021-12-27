@@ -7,10 +7,7 @@ namespace Many.Validators.Benchmark
     {
         static void Main(string[] args)
         {
-            string z = "true";
-            var temp = Get(z);
-
-            Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
+            OtherTest();
 
             //var summary = BenchmarkRunner.Run<Implementations.GreaterThanZeroImplementation>();
 
@@ -32,12 +29,15 @@ namespace Many.Validators.Benchmark
             //var summary10 = BenchmarkRunner.Run<Benchmarks.Negative.NegativeValidatorNullableIntBenchmark>();
             //var summary11 = BenchmarkRunner.Run<Benchmarks.Negative.NegativeOrZeroValidatorIntBenchmark>();
             //var summary12 = BenchmarkRunner.Run<Benchmarks.Negative.NegativeOrZerValidatorNullableIntBenchmark>();
-
-
-
-            Console.WriteLine($">>>>>>>>>>>>>>> {DateTime.Now}");
         }
 
+        private static void OtherTest()
+		{
+            
+            //string z = "true";
+            //var temp = Get(z);
+        }
+       
         private static bool Get(NotNull<string> value)
 		{
             return bool.Parse(value);

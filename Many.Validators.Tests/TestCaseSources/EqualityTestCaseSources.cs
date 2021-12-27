@@ -1,4 +1,7 @@
-﻿namespace Many.Validators.Tests.TestCaseSources
+﻿using Many.Validators.Range;
+using Many.Validators.Tests.Fixtures;
+
+namespace Many.Validators.Tests.TestCaseSources
 {
     internal static class EqualityTestCaseSources
     {
@@ -20,11 +23,16 @@
         {
             new object[] { 1230, 1230 },
             new object[] { 123, 123 },
-        };
+        };      
         public static readonly object[] IntNegative =
         {
             new object[] { -1230, -1230 },
             new object[] { -123, -123 },
+        };
+        public static readonly object[] IntNegative_Range_neg100_1 =
+        {
+            new object[] { -10, -10 },
+            new object[] { - 13, -13 }
         };
         public static readonly object[] Bool =
         {
@@ -40,6 +48,13 @@
         };
         public static readonly object[] DoubleNegative =
         {
+            new object[] { -1.00, -1 },
+            new object[] { -1.0, -1.0 },
+            new object[] { -12.234, -12.234 },
+            new object[] { -13.3, -13.3 },
+        };
+        public static readonly object[] DoubleNegative_Range_neg100_1 =
+       {
             new object[] { -1.00, -1 },
             new object[] { -1.0, -1.0 },
             new object[] { -12.234, -12.234 },
