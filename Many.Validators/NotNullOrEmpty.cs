@@ -4,7 +4,8 @@ using System;
 namespace Many.Validators
 {
     /// <summary>
-    /// Validation type to check if value is null or empty
+    /// Validation type to check if value is null or empty (only non-enumerable types)
+    /// For enumerables use <see cref="NotNullOrEmptyArray{TValue}"/>
     /// </summary>
     /// <exception cref="ArgumentException">Value is empty</exception>
     /// <exception cref="ArgumentNullException">Value is null</exception>

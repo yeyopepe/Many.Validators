@@ -3,7 +3,7 @@
 	<metadata>
 		<id>Many.Validators</id>
 		<title>A set of very-easy-to-read immutable types to add seamless validations in your projects.</title>
-		<version>1.0.4</version>
+		<version>1.1.0</version>
 		<authors>Sergio José Martínez Primiani</authors>
 		<owners>Sergio José Martínez Primiani</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,6 +14,8 @@
 		<repository type="git" url="https://github.com/yeyopepe/Many.Mocks" />
 		<licenseUrl>https://github.com/yeyopepe/Many.Validators/blob/main/LICENSE.txt</licenseUrl>
 		<releaseNotes>
+			v.1.1.0
+			- Added: NotNullOrEmpty(string) and NotNullOrEmptyArray
 			v.1.0.4
 			- NotNull, NotEmpty, Positive, PositiveOrZero, Negative and NegativeOrZero validators.
 		</releaseNotes>

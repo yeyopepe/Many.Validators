@@ -11,13 +11,13 @@ namespace Many.Validators
     /// <typeparam name="TValue">Underlying value type</typeparam>
     /// <exception cref="ArgumentException">Value is empty</exception>
     /// <exception cref="ArgumentNullException">Value is null</exception>
-    public readonly struct NotNullOrEmptyList<TValue>: IValidator<TValue>
+    public readonly struct NotNullOrEmptyArray<TValue>: IValidator<TValue>
         where TValue : IEnumerable
     {
         /// <inheritdoc/>
         public TValue Value { get; }
 
-		public NotNullOrEmptyList(TValue value)
+		public NotNullOrEmptyArray(TValue value)
         {
             this.Value = value;
             Validate(value);
@@ -27,10 +27,10 @@ namespace Many.Validators
         /// <exception cref="ArgumentNullException">Value is null</exception>
         private void Validate(TValue value)
         {
-            ThrowExceptionIfNull<NotNullOrEmptyList<TValue>, TValue>(value);
+            ThrowExceptionIfNull<NotNullOrEmptyArray<TValue>, TValue>(value);
             
             if (!value.GetEnumerator().MoveNext()) 
-                throw new ArgumentException(paramName: nameof(value), message: value.GetExceptionMessage<NotNullOrEmptyList<TValue>, TValue>("must not be empty"));
+                throw new ArgumentException(paramName: nameof(value), message: value.GetExceptionMessage<NotNullOrEmptyArray<TValue>, TValue>("must not be empty"));
         }
 
         #region Converters and operators
@@ -38,27 +38,27 @@ namespace Many.Validators
         /// Implicit conversion method from string to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator NotNullOrEmptyList<TValue>(TValue value)
+        public static implicit operator NotNullOrEmptyArray<TValue>(TValue value)
         {
-            return new NotNullOrEmptyList<TValue>(value);
+            return new NotNullOrEmptyArray<TValue>(value);
         }
         /// <summary>
         /// </summary>
         /// <param name="value">Current value</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator TValue(NotNullOrEmptyList<TValue> value)
+        public static implicit operator TValue(NotNullOrEmptyArray<TValue> value)
         {
-            ThrowExceptionIfNull<NotNullOrEmptyList<TValue>, TValue>(value);
+            ThrowExceptionIfNull<NotNullOrEmptyArray<TValue>, TValue>(value);
             return value.Value;
         }
-        public static bool operator ==(object source, NotNullOrEmptyList<TValue> other) => other.Value.OverrideIEnumerableEquals<NotNullOrEmptyList<TValue>, TValue>(source);
-        public static bool operator !=(object source, NotNullOrEmptyList<TValue> other) => !other.Value.OverrideIEnumerableEquals<NotNullOrEmptyList<TValue>, TValue>(source);
+        public static bool operator ==(object source, NotNullOrEmptyArray<TValue> other) => other.Value.OverrideIEnumerableEquals<NotNullOrEmptyArray<TValue>, TValue>(source);
+        public static bool operator !=(object source, NotNullOrEmptyArray<TValue> other) => !other.Value.OverrideIEnumerableEquals<NotNullOrEmptyArray<TValue>, TValue>(source);
 
         #endregion Converters and operators
 
         #region Overrides
         /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideIEnumerableEquals<NotNullOrEmptyList<TValue>, TValue>(obj);
+        public override bool Equals(object obj) => this.Value.OverrideIEnumerableEquals<NotNullOrEmptyArray<TValue>, TValue>(obj);
         /// <inheritdoc/>
         public override string ToString() => Value.OverrideToString();
         /// <inheritdoc/>

@@ -42,7 +42,8 @@ namespace Many.Validators.Statics
         public static bool OverrideIEnumerableEquals<TValidator, TValue>(this TValue value, object obj)
             where TValidator : IValidator<TValue>
         {
-            if (obj is IValidator)
+            if (obj is IValidator &&
+                 value != null)
             {
                 var objIEnumerable = (IEnumerable)((TValidator)obj).Value;
                 var objEnumerator = objIEnumerable.GetEnumerator();
@@ -59,10 +60,11 @@ namespace Many.Validators.Statics
                 };
                 return result;
             }
-            else if (obj == null && value == null)
+
+            if (obj == null && value == null)
                 return true;
 
             return false;
         }
-    }
+	}
 }
