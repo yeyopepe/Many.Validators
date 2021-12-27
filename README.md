@@ -37,7 +37,7 @@ I focused on:
 <br/>The baseline corresponds to the simplest way to validate each case (copy-pasted IF conditional(s) and manual exception throwing). Data is provided from supported frameworks but in this table the value is from NET60 benchmarks.
 <br>Results for older frameworks can vary depending the framework (generally older the framework a bit worse the result) and if you force conversions or not (you can check the complete results at Many.Validators.Benchmark/Data).</sub>
  
-<sub>(**) The way used to check if an array is empty (use of methods Any() or Count() or properties Count or Length) does not change the performance significantly. This value is an average value of all cases with a deviation of 0.1.
+<sub>(**) The way used to check if an array is empty (use of methods Any() or Count() or properties Count or Length) does not change the performance significantly. This value is an average value of all cases.
 
 <br/>
 
