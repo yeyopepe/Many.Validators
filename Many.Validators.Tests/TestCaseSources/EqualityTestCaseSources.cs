@@ -8,9 +8,13 @@
             new object[] { " ", " " },
         };
         public static readonly object[] NotEmptyString =
-       {
+        {
             new object[] { "asdf", "asdf" },
             new object[] { "1212", "1212" },
+        };
+        public static readonly object[] NotEmptyLists =
+        {
+            new object[] { new[]{"asdf", "asdf" }, new[] { "asdf", "asdf" } }
         };
         public static readonly object[] IntPositive =
         {

@@ -1,20 +1,25 @@
 ﻿namespace Many.Validators.Tests.TestCaseSources
 {
-    internal class ClassTestCaseSources
+	internal class ClassTestCaseSources
     {
         public static readonly string[] NotEmpty =
         {
             "asdf"
         };
-        public static readonly string[] Null = 
+        public static readonly object[] NotEmptyList =
         {
-            null
+            new string[]{ "asdf","asdf"}
         };
         public static readonly string[] Empty =
         {
             "",
             " ",
             "      "
+        };
+        public static readonly object[] EmptyList =
+        {
+           new string[0],
+           new string[] { },
         };
 
     }

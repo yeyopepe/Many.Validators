@@ -10,11 +10,11 @@ namespace Many.Validators.Benchmark.Benchmarks.Negative
     public abstract class NegativeValidatorBenchmarkBase<TValue>
     {
         public readonly TValue _argumentsToFail;
-        public readonly TValue _argumentsToPass;
+        public readonly TValue _argumentsToSuccess;
         public NegativeValidatorBenchmarkBase(TValue argumentsToFail,
-                                                TValue argumentsWhenNotNull)
+                                                TValue argumentsToSuccess)
         {
-            _argumentsToPass = argumentsWhenNotNull;
+            _argumentsToSuccess = argumentsToSuccess;
             _argumentsToFail = argumentsToFail;
         }
 
@@ -54,11 +54,11 @@ namespace Many.Validators.Benchmark.Benchmarks.Negative
         }
 
         [Benchmark(Baseline = true)]
-        public void Success_WithoutValidator() => WithNoValidatorImplementation(_argumentsToPass);
+        public void Success_WithoutValidator() => WithNoValidatorImplementation(_argumentsToSuccess);
         [Benchmark]
-        public void Success_WithValidator_Conversion() => ValidatorImplementation(_argumentsToPass);
+        public void Success_WithValidator_Conversion() => ValidatorImplementation(_argumentsToSuccess);
         [Benchmark]
-        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new Negative<TValue>(_argumentsToPass));
+        public void Success_WithValidator_NoConversion() => ValidatorImplementation(new Negative<TValue>(_argumentsToSuccess));
 
         private static TValue WithNoValidatorImplementation(dynamic value)
         {

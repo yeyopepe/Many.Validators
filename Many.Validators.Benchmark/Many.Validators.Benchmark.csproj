@@ -13,4 +13,8 @@
     <ProjectReference Include="..\Many.Validators\Many.Validators.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\v1.1.0\" />
+  </ItemGroup>
+
 </Project>
