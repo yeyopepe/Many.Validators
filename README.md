@@ -1,7 +1,7 @@
 # Many.Validators
 A set of very-easy-to-read immutable types to add seamless validations in your projects.
 
-I focused on:
+Focused on:
 - Less documentation, better code legibility.
 - No extra line of code.
 - [Extremely] easy integration.
