@@ -11,7 +11,7 @@ namespace Many.Validators.Statics
         /// <typeparam name="TValue">Underlying value type</typeparam>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static void ThrowExceptionIfNull<TValidator, TValue>(dynamic value)
+        public static void ThrowExceptionIfNull<TValidator, TValue>(object value)
           where TValidator : IValidator<TValue>
         {
             if (value is null)
@@ -26,7 +26,7 @@ namespace Many.Validators.Statics
         /// <param name="value"></param>
         /// <param name="reasonOfError"></param>
         /// <returns>Exception message</returns>
-        public static string GetExceptionMessageForValidator<TValidator, TValue>(dynamic value, string reasonOfError)
+        public static string GetExceptionMessageForValidator<TValidator, TValue>(object value, string reasonOfError)
            where TValidator : IValidator<TValue>
            => $"Validator {ErrorHandlingExtensions.GetValidatorInfo<TValidator, TValue>()}: value '{value}' {reasonOfError}";
 
@@ -38,7 +38,7 @@ namespace Many.Validators.Statics
         /// <param name="value"></param>
         /// <param name="reasonOfError"></param>
         /// <returns>Exception message</returns>
-        public static string GetExceptionMessageaForRange<TValue>(Type rangeType, dynamic value, string reasonOfError)
+        public static string GetExceptionMessageaForRange<TValue>(Type rangeType, object value, string reasonOfError)
            => $"Validator {ErrorHandlingExtensions.GetRangeInfo<TValue>(rangeType)}: value '{value}' {reasonOfError}";
     }
 }

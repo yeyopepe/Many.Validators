@@ -3,9 +3,9 @@ using System;
 
 namespace Many.Validators.Benchmark.Benchmarks.InRange
 {
-    //[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net472)]
-    //[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp31)]
-    [SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60)]
+	[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net472)]
+	[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NetCoreApp31)]
+	[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net60)]
     [MemoryDiagnoser]
     [MedianColumn]
     [IterationCount(3)]
@@ -14,7 +14,6 @@ namespace Many.Validators.Benchmark.Benchmarks.InRange
     {
         [Benchmark]
         [Arguments(1000)]
-        [Arguments(-1000)]
         public virtual void Fail_WithoutValidator(long value)
         {
             try
@@ -27,7 +26,6 @@ namespace Many.Validators.Benchmark.Benchmarks.InRange
         }
         [Benchmark]
         [Arguments(1000)]
-        [Arguments(-1000)]
         public void Fail_WithValidator_Conversion(long value)
         {
             try
@@ -40,7 +38,6 @@ namespace Many.Validators.Benchmark.Benchmarks.InRange
         }
         [Benchmark]
         [Arguments(1000)]
-        [Arguments(-1000)]
         public void Fail_WithValidator_NoConversion(long value)
         {
             try

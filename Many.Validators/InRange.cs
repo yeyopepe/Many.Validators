@@ -26,7 +26,7 @@ namespace Many.Validators
         /// <inheritdoc/>
 		/// <exception cref="InvalidCastException"></exception>
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
-		private void Validate(dynamic value)
+		private void Validate(TValue value)
         {
             ThrowExceptionIfNull<InRange<TRange,TValue>, TValue>(value);
 
