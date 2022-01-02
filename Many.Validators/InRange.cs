@@ -31,23 +31,7 @@ namespace Many.Validators
             ThrowExceptionIfNull<InRange<TRange,TValue>, TValue>(value);
 
             var ranges = Activator.CreateInstance<TRange>();
-			ranges.Validate(value);
-
-            //TODO
-//            try
-//            {
-//#if NET5_0_OR_GREATER
-//                if (value is Half)
-//                    condition = value < (Half)0;
-//                else
-//#endif
-//                condition = value < 0;
-//            }
-//            catch
-//            {
-//                throw new InvalidCastException(message: GetExceptionMessage<InRange<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
-//            }
-
+			ranges.Validate(value);           
         }
 
         #region Converters and operators
