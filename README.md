@@ -1,10 +1,9 @@
 # Many.Validators
 A set of very-easy-to-read immutable types to add seamless validations in your projects.
 
-I focused on:
+Focused on:
 - Less documentation, better code legibility.
-- No extra line of code.
-- [Extremely] easy integration.
+- No extra line of code, just change type by validators and that's all.
 - Minimum overhead compared to traditional copy-pasted-conditionals way or any other implementation.
 
 
