@@ -26,7 +26,7 @@
             new object[] { -1230, -1230 },
             new object[] { -123, -123 },
         };
-        public static readonly object[] IntNegative_Range_neg100_1 =
+        public static readonly object[] IntNegative_InRange_neg100_1 =
         {
             new object[] { -10, -10 },
             new object[] { - 13, -13 }

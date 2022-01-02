@@ -8,7 +8,7 @@ namespace Many.Validators.Tests
 	[TestFixture]
     internal partial class InRangeTests_Overrides
     {
-        [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_Range_neg100_1))]
+        [TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_InRange_neg100_1))]
         public void EqualityOperator_ValidCases_ReturnsTrue(Int64 value1, Int64 value2)
         {
             InRange<Range_Int64_neg100_1, Int64> a1 = value1;
@@ -36,7 +36,7 @@ namespace Many.Validators.Tests
 			InRange<Range_Double_neg100_1, double> a2 = value2;
 			Assert.IsFalse(a1 == a2);
 		}
-		[TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_Range_neg100_1))]
+		[TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_InRange_neg100_1))]
 		public void InequalityOperator_InvalidCases_ReturnsFalse(Int64 value1, Int64 value2)
 		{
 			InRange<Range_Int64_neg100_1, Int64> a1 = value1;
@@ -64,7 +64,7 @@ namespace Many.Validators.Tests
 			InRange<Range_Double_neg100_1, double> a2 = value2;
 			Assert.IsTrue(a1 != a2);
 		}
-		[TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_Range_neg100_1))]
+		[TestCaseSource(typeof(EqualityTestCaseSources), nameof(EqualityTestCaseSources.IntNegative_InRange_neg100_1))]
 		public void Equals_ValidCases_ReturnsTrue(Int64 value1, Int64 value2)
 		{
 			InRange<Range_Int64_neg100_1, Int64> a1 = value1;

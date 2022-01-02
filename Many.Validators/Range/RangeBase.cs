@@ -10,7 +10,7 @@ namespace Many.Validators.Range
 	public abstract class RangeBase<TValue>
 	{
 		/// <summary>
-		/// Gets the minimum value of the range (exclusive)
+		/// Gets the minimum value of the range (inclusive)
 		/// </summary>
 		public abstract TValue Min { get; }
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Many.Validators.Range
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
 		public void Validate(dynamic value)
 		{
-			if (value <= Min ||
+			if (value < Min ||
 				value > Max)
 			{
 				throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageaForRange<TValue>(this.GetType(), value, $"must be  >{Min} and <={Max}"));

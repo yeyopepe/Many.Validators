@@ -21,7 +21,7 @@ namespace Many.Validators.Tests.TestCaseSources
         };
         public static readonly Int64[] Int64_InRange_neg100_1=
         {
-            -99,
+            -100,
             1
         };
         public static readonly SByte[] SByte =
@@ -37,7 +37,7 @@ namespace Many.Validators.Tests.TestCaseSources
         };
         public static readonly Half[] Half_InRange_neg100_1 =
        {
-           (Half)(-99.9),
+           (Half)(-100.0),
            (Half)(1)
         };
 #endif
@@ -57,7 +57,7 @@ namespace Many.Validators.Tests.TestCaseSources
         };
         public static readonly Double[] Double_InRange_neg100_1 =
         {
-            -99.999999d,
+            -100.000d,
             1d
         };
         public static readonly Decimal[] Decimal =

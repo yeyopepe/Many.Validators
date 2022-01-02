@@ -36,7 +36,7 @@ I focused on:
 
  <sub>(*) This column shows the average overhead calculation in the validation-passes scenario that is the most expensive: we need to perform a validation and it passes. **This is a measure of the overhead cost, not the cost itself.**
 <br/>The baseline corresponds to the simplest way to validate each case (copy-pasted IF conditional(s) and manual exception throwing). Data is provided from supported frameworks but in this table the value is from NET60 benchmarks.
-<br>Results for older frameworks can vary depending the framework (generally older the framework a bit worse the result) and if you force conversions or not (you can check the complete results at Many.Validators.Benchmark/Data).</sub>
+<br/>Results for older frameworks can vary depending the framework (generally older the framework a bit worse the result) and if you force conversions or not (you can check the complete results at Many.Validators.Benchmark/Data).</sub>
  
 
 
