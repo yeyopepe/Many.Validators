@@ -10,12 +10,19 @@
             new object[] { 13, 123 },
         };
         public static readonly object[] IntNegative =
-       {
+        {
             new object[] { -10, -1 },
             new object[] { -1, -10 },
             new object[] { -123, -1230 },
             new object[] { -13, -123 },
         };
+        public static readonly object[] IntNegative_Range_neg100_1 =
+        {
+            new object[] { -10, -1 },
+            new object[] { -1, -10 },
+            new object[] { -13, -99 },
+        };
+        
         public static readonly object[] EmptyString =
         {
             new object[] { "", " " },
@@ -47,5 +54,12 @@
             new object[] { -0.001, -0.1 },
             new object[] { -1.01, -1.011 },
         };
+        public static readonly object[] DoubleNegative_Range_neg100_1 =
+        {
+            new object[] { -19.0, -95.01 },
+            new object[] { -0.001, -0.1 },
+            new object[] { -1.01, -1.011 },
+        };
+        
     }
 }

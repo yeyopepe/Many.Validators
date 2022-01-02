@@ -6,6 +6,7 @@ namespace Many.Validators.Range
 	/// <summary>
 	/// Represents a range for <see cref="TValue"/> values
 	/// </summary>
+	/// <typeparam name="TValue">Underlying value type</typeparam>
 	public abstract class Range<TValue>
 	{
 		/// <summary>

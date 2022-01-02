@@ -1,9 +1,6 @@
-﻿using Many.Validators.Range;
-using Many.Validators.Tests.Fixtures;
-
-namespace Many.Validators.Tests.TestCaseSources
+﻿namespace Many.Validators.Tests.TestCaseSources
 {
-    internal static class EqualityTestCaseSources
+	internal static class EqualityTestCaseSources
     {
        public static readonly object[] EmptyString =
        {

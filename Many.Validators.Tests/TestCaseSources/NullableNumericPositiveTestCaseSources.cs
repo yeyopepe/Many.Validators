@@ -58,7 +58,7 @@ namespace Many.Validators.Tests.TestCaseSources
         };
         public static readonly Double?[] Double =
         {
-            0.000000000000000000000000000000000000000000001f,
+            0.000000000000000000000000000000000000000000001d,
 #if NET47_OR_GREATER
             1.797693134862315E+308 //Accuracy bug in this version
 #else

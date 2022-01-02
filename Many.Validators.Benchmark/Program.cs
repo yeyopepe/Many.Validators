@@ -1,9 +1,8 @@
 ﻿using BenchmarkDotNet.Running;
-using System;
 
 namespace Many.Validators.Benchmark
 {
-    internal class Program
+	internal class Program
     {
         static void Main(string[] args)
         {

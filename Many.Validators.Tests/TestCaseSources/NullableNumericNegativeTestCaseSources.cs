@@ -19,6 +19,12 @@ namespace Many.Validators.Tests.TestCaseSources
             long.MinValue,
             -1
         };
+        public static readonly Int64?[] Int64_InRange_neg100_1 =
+       {
+            -99,
+            1
+        };
+        
         public static readonly SByte?[] SByte =
         {
             sbyte.MinValue,
@@ -29,6 +35,11 @@ namespace Many.Validators.Tests.TestCaseSources
         {
            (Half)(-65550),
            (Half)(-0.0000001)
+        };
+        public static readonly Half?[] Half_InRange_neg100_1 =
+        {
+           (Half)(-99.9),
+           (Half)(1)
         };
 #endif
         public static readonly Single?[] Single =
@@ -44,6 +55,11 @@ namespace Many.Validators.Tests.TestCaseSources
             double.MinValue,
 #endif
             -0.000000000000000000000000000000000000000000001f
+        };
+        public static readonly Double?[] Double_InRange_neg100_1 =
+        {
+            -99.999999d,
+            1d
         };
         public static readonly Decimal?[] Decimal =
         {

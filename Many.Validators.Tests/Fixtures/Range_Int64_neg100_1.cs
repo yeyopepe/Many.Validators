@@ -1,7 +1,5 @@
 ﻿using Many.Validators.Range;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Many.Validators.Tests.Fixtures
 {
