@@ -7,7 +7,7 @@ namespace Many.Validators.Range
 	/// Represents a range for <see cref="TValue"/> values
 	/// </summary>
 	/// <typeparam name="TValue">Underlying value type</typeparam>
-	public abstract class Range<TValue>
+	public abstract class RangeBase<TValue>
 	{
 		/// <summary>
 		/// Gets the minimum value of the range (exclusive)

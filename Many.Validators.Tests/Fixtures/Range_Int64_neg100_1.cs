@@ -3,7 +3,7 @@ using System;
 
 namespace Many.Validators.Tests.Fixtures
 {
-	internal class Range_Int64_neg100_1 : Range<Int64>
+	internal class Range_Int64_neg100_1 : RangeBase<Int64>
 	{
 		public override long Max => 1;
 

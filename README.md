@@ -7,18 +7,19 @@ I focused on:
 - [Extremely] easy integration.
 - Minimum overhead compared to traditional copy-pasted-conditionals way or any other implementation.
 
-<br/>
+
 
 👉Download releases at https://www.nuget.org/packages/Many.Validators/
 
-<br/>
+
 
 # Features
 
 ### NetStandard 2.1 and NET60 specific implementations
 - New Half type support for NET5 and NET6 projects.
 
-<br/>
+
+
 
 ### Built-int validators and features 
 
@@ -31,20 +32,22 @@ I focused on:
 |PositiveOrZero<>               |✅         |1.3 - 2.1    |1.0.0
 |Negative<>                     |✅         |1.3 - 2.1    |1.0.0
 |NegativeOrZero<>               |✅         |1.3 - 2.1    |1.0.0
-|InRange                        |❌          |           |2.0.0
+|InRange                        |✅          | ❌         |2.0.0-beta1
 
  <sub>(*) This column shows the average overhead calculation in the validation-passes scenario that is the most expensive: we need to perform a validation and it passes. **This is a measure of the overhead cost, not the cost itself.**
 <br/>The baseline corresponds to the simplest way to validate each case (copy-pasted IF conditional(s) and manual exception throwing). Data is provided from supported frameworks but in this table the value is from NET60 benchmarks.
 <br>Results for older frameworks can vary depending the framework (generally older the framework a bit worse the result) and if you force conversions or not (you can check the complete results at Many.Validators.Benchmark/Data).</sub>
  
 
-<br/>
+
+
 
 |Feature                    |Implemented|Version
 |---------------------------|:---------:|:-------:
 |Validators concatenation   |❌         |?
 
-<br/>
+
+
 
 ### Two-way conversion between validator and underlying types
 ```
@@ -68,7 +71,9 @@ bool WhateverMethod(NotNull<string> @param)
     return !string.IsNullOrWhiteSpace(@param); 
 }
 ```
-<br/>
+
+
+
 And call your methods as usual with no additional conversions:
 
 ```
@@ -79,5 +84,31 @@ string p;
 var result = WhateverMethod(p);
 
 <Continues if no exception was raised...>
-
 ```
+
+
+### InRange validators
+InRange validators need a range 😅. To get that you only need to create your custom range class (inherit from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 
+
+Example:
+```
+namespace YourProject.Validators.Ranges.Int64
+{
+    internal class Neg100_1 : Range<Int64>
+    {
+        public override long Max => 1;
+
+        public override long Min => -100;
+    }
+}
+```
+
+Then only use it:
+```
+public void DoSometing(InRange<Neg100_1, Int64> param1) 
+{
+    ...
+}
+```
+
+Tip: Also you can follow a self-descriptive namespace naming strategy in order to get clearer shorter range names.

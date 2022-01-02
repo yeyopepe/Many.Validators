@@ -13,7 +13,7 @@ namespace Many.Validators
     /// <exception cref="InvalidCastException"></exception>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public readonly struct InRange<TRange, TValue> : IValidator<TValue>
-        where TRange : Range<TValue>
+        where TRange : RangeBase<TValue>
     {
         /// <inheritdoc/>
         public TValue Value { get; }

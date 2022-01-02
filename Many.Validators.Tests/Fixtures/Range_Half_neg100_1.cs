@@ -3,7 +3,7 @@ using Many.Validators.Range;
 
 namespace Many.Validators.Tests.Fixtures
 {
-	internal class Range_Half_neg100_1 : Range<System.Half>
+	internal class Range_Half_neg100_1 : RangeBase<System.Half>
 	{
 		public override System.Half Min => (System.Half)(-100.0);
 
