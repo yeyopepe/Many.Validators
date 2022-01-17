@@ -80,6 +80,25 @@ var result = WhateverMethod(p);
 <Continues if no exception was raised...>
 ```
 
+### Explicit validations
+
+```
+class YourObject
+{
+    public string Id {get;set;}
+    public string Data {get;set;}
+}
+```
+
+```
+public void Check(NotNull<YourObject> param) //This line checks if param itself is not null
+{
+    NotNull<string>
+        .Validate(param.Id)
+        .Validate(param.Data)
+}
+```
+
 
 ### InRange validators
 InRange validators need a range 😅. To get that you only need to create your custom range class (inherit from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 

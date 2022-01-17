@@ -51,6 +51,11 @@ namespace Many.Validators
         public override int GetHashCode() => Value.OverrideGetHashCode();
         #endregion Overrides
 
-       
+        #region Explicit methods
+        public static void Validate(params TValue[] values)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion Explicit methods
     }
 }
