@@ -14,11 +14,6 @@ Focused on:
 
 # Features
 
-### NetStandard 2.1 and NET60 specific implementations
-- New Half type support for NET5 and NET6 projects.
-
-
-
 
 ### Built-int validators and features 
 
@@ -38,6 +33,7 @@ Focused on:
 
 |Feature                    |Implemented|Version
 |---------------------------|:---------:|:-------:
+|Explicit validation        |✅         |3.0.0
 |Validators concatenation   |❌         |?
 
 
@@ -66,8 +62,6 @@ bool WhateverMethod(NotNull<string> @param)
 }
 ```
 
-
-
 And call your methods as usual with no additional conversions:
 
 ```
@@ -79,26 +73,6 @@ var result = WhateverMethod(p);
 
 <Continues if no exception was raised...>
 ```
-
-### Explicit validations
-
-```
-class YourObject
-{
-    public string Id {get;set;}
-    public string Data {get;set;}
-}
-```
-
-```
-public void Check(NotNull<YourObject> param) //This line checks if param itself is not null
-{
-    NotNull<string>
-        .Validate(param.Id)
-        .Validate(param.Data)
-}
-```
-
 
 ### InRange validators
 InRange validators need a range 😅. To get that you only need to create your custom range class (inherit from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 
@@ -125,3 +99,36 @@ public void DoSometing(InRange<Neg100_1, Int64> param1)
 ```
 
 Tip: Also you can follow a self-descriptive namespace naming strategy in order to get clearer shorter range names.
+
+
+### Explicit validations
+Also you can validate in a explicit way. If you have a class like this:
+```
+class YourObject
+{
+    public string Id {get;set;}
+    public string Data {get;set;}
+}
+```
+
+You can use it in your code to validate it content in serveral ways:
+```
+public void DoSomething(NotNull<YourObject> param) //This line checks if param itself is not null
+{
+    var otherParamsToCheck = new string[]{param.Id, param.Data};
+
+    //You can validate params and get an exception if any fails validation
+    NotNull<string>.Validate(otherParamsToCheck);
+
+    //You can validate params and get all erroneous values with no exception
+    NotNull<string>.TryValidate(otherParamsToCheck, out string[] errors);
+
+    //You can validate params and get only the first erroneous value with no exception
+    NotNull<string>.TryValidate(otherParamsToCheck, out string error);
+    
+}
+```
+
+### NetStandard 2.1 and NET60 specific implementations
+- New Half type support for NET5 and NET6 projects.
+
