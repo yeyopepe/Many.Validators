@@ -31,10 +31,10 @@ Focused on:
 
 
 
-|Feature                    |Implemented|Version
-|---------------------------|:---------:|:-------:
-|Explicit validation        |✅         |3.0.0
-|Validators concatenation   |❌         |?
+|Feature                         |Implemented|Version
+|--------------------------------|:---------:|:-------:
+|Multiple explicit validation    |✅         |3.0.0
+|Validators concatenation        |❌         |?
 
 
 
