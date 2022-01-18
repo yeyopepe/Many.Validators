@@ -102,7 +102,7 @@ Tip: Also you can follow a self-descriptive namespace naming strategy in order t
 
 
 ### ✅ Multiple explicit validations
-Also you can validate in a explicit way. If you have a class like this:
+Also you can validate multiple values in a explicit way. If you have a class like this:
 ```
 class YourObject
 {
@@ -111,21 +111,21 @@ class YourObject
 }
 ```
 
-You can use it in your code to validate it content in serveral ways:
+You can validate itself and properties' values in several ways:
 ```
 public void DoSomething(NotNull<YourObject> param) //This line checks if param itself is not null
 {
     var otherParamsToCheck = new string[]{param.Id, param.Data};
 
-    //You can validate params and get an exception if any fails validation or...
+    //You can validate params and get an exception if any of them is not valid or...
     NotNull<string>.Validate(otherParamsToCheck);
 
-    //...you can validate params and get the result with no exceptions
+    //...you can validate params and get the whole result with no exceptions
 
-    //Get all errors
+    //1.Get all errors
     var result = NotNull<string>.IsValid(otherParamsToCheck, out string[] errors);
 
-    //Get and stop after first error
+    //2.Get and stop after first error
     result = NotNull<string>.IsValid(otherParamsToCheck, out string error);    
 }
 ```
