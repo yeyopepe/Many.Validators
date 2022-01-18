@@ -21,10 +21,46 @@ namespace Many.Validators
 			Validate(value);
 		}
 
+		#region Converters and operators
+		/// <summary>
+		/// Implicit conversion method from <see cref="TValue"/> to current
+		/// </summary>
+		/// <param name="value">Underlying value</param>
+		public static implicit operator Positive<TValue>(TValue value)
+		{
+			return new Positive<TValue>(value);
+		}
+		/// <summary>
+		/// Implicit conversion method from current to <see cref="TValue"/>
+		/// </summary>
+		/// <param name="value">Current value</param>
+		/// <exception cref="ArgumentNullException"></exception>
+		public static implicit operator TValue(Positive<TValue> value)
+		{
+			value.ThrowExceptionIfNull<Positive<TValue>, TValue>();
+			return value.Value;
+		}
+		public static bool operator ==(object source, Positive<TValue> other) => source.Equals(other);
+		public static bool operator !=(object source, Positive<TValue> other) => !source.Equals(other);
+		#endregion Converters and operators
+
+		#region Overrides
 		/// <inheritdoc/>
+		public override bool Equals(object obj) => this.Value.OverrideEquals<Positive<TValue>, TValue>(obj);
+		/// <inheritdoc/>
+		public override string ToString() => Value.OverrideToString();
+		/// <inheritdoc/>
+		public override int GetHashCode() => Value.OverrideGetHashCode();
+		#endregion Overrides
+
+		#region Explicit validation
+		/// <summary>
+		/// Validates given value and throws an exception in case of failure 
+		/// </summary>
+		/// <param name="value">Value to validate</param>
 		/// <exception cref="InvalidCastException"></exception>
 		/// <exception cref="ArgumentOutOfRangeException"></exception>
-		private void Validate(dynamic value)
+		private static void Validate(dynamic value)
 		{
 			ThrowExceptionIfNull<Positive<TValue>, TValue>(value);
 
@@ -47,37 +83,42 @@ namespace Many.Validators
 				throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageForValidator<Positive<TValue>, TValue>(value, "must be greater than zero"));
 		}
 
-
-#region Converters and operators
 		/// <summary>
-		/// Implicit conversion method from <see cref="TValue"/> to current
+		/// Validates given value and throws an exception in case of failure 
 		/// </summary>
-		/// <param name="value">Underlying value</param>
-		public static implicit operator Positive<TValue>(TValue value)
-		{
-			return new Positive<TValue>(value);
-		}
-		/// <summary>
-		/// Implicit conversion method from current to <see cref="TValue"/>
-		/// </summary>
-		/// <param name="value">Current value</param>
-		/// <exception cref="ArgumentNullException"></exception>
-		public static implicit operator TValue(Positive<TValue> value)
-		{
-			value.ThrowExceptionIfNull<Positive<TValue>, TValue>();
-			return value.Value;
-		}
-		public static bool operator ==(object source, Positive<TValue> other) => source.Equals(other);
-		public static bool operator !=(object source, Positive<TValue> other) => !source.Equals(other);
-#endregion Converters and operators
+		/// <param name="values">Values to validate</param>
+		/// <exception cref="InvalidCastException"></exception>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
+		public static void Validate(TValue[] values)
+			=> ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
+																	throwException: true,
+																	out _,
+																	values);
 
-#region Overrides
-		/// <inheritdoc/>
-		public override bool Equals(object obj) => this.Value.OverrideEquals<Positive<TValue>, TValue>(obj);
-		/// <inheritdoc/>
-		public override string ToString() => Value.OverrideToString();
-		/// <inheritdoc/>
-		public override int GetHashCode() => Value.OverrideGetHashCode();
-#endregion Overrides
+		/// <summary>
+		/// Tries to validate given values and get first error
+		/// </summary>
+		/// <param name="values">Values to validate</param>
+		/// <param name="firstError">First erroneous value if found</param>
+		/// <returns>TRUE if validation is success. FALSE otherwise.</returns>
+		public static bool IsValid(TValue[] values,
+										out TValue firstError)
+			=> ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
+														throwException: false,
+														out firstError,
+														values);
+		/// <summary>
+		/// Tries to validate given values and get all errors
+		/// </summary>
+		/// <param name="values">Values to validate</param>
+		/// <param name="errors">Erroneous values if found</param>
+		/// <returns>TRUE if validation is success. FALSE otherwise.</returns>
+		public static bool IsValid(TValue[] values,
+										out TValue[] errors)
+			=> ValidationExtensions.TryValidateAll(validation: (s) => Validate(s),
+													out errors,
+													values);
+
+		#endregion Explicit validation
 	}
 }

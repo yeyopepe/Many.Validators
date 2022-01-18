@@ -1,16 +1,17 @@
-﻿using NUnit.Framework;
+﻿using Many.Validators.Tests.Fixtures;
+using NUnit.Framework;
 using System;
 using System.Linq;
 
 namespace Many.Validators.Tests
 {
 	[TestFixture]
-	internal partial class NotNullTests
+	internal partial class InRangeTests
 	{
-		readonly int?[] _inputErrors = new int?[] { null, null };
-		readonly int?[] _inputValid = new int?[] { 1, 5, 234, -100 };
+		readonly Int64[] _inputErrors = new Int64[] { -342, 1230 }; //Range Range_Int64_neg100_1
+		readonly Int64[] _inputValid = new Int64[] { -1, -5, -100 };
 
-		private int?[] GetInput(bool includeErrors = true)
+		private Int64[] GetInput(bool includeErrors = true)
 			=> includeErrors ?
 				_inputValid.Concat(_inputErrors).ToArray() :
 				_inputValid;
@@ -24,8 +25,8 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
-													errors: out int?[] errors);
+			var result = InRange<Range_Int64_neg100_1, Int64>.IsValid(values: input,
+																		errors: out Int64[] errors);
 			//Assert
 			Assert.AreEqual(expectedResult, result);
 			Assert.AreEqual(expectedResult ? 0 : _inputErrors.Length, errors.Length);
@@ -38,11 +39,14 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
-													firstError: out int? error);
+			var result = InRange<Range_Int64_neg100_1, Int64>.IsValid(values: input, firstError: out Int64 error);
+
 			//Assert
 			Assert.AreEqual(expectedResult, result);
-			Assert.IsNull(error);
+			if (!expectedResult)
+				Assert.IsNotNull(error);
+			else
+				Assert.AreEqual(0, error);
 		}
 		[Test]
 		public void Validate_MultipleValues_ThrowsException()
@@ -51,7 +55,7 @@ namespace Many.Validators.Tests
 			var input = GetInput();
 
 			//Test
-			Assert.Throws<ArgumentNullException>(() => NotNull<int?>.Validate(values: input));
+			Assert.Throws<ArgumentOutOfRangeException>(() => InRange<Range_Int64_neg100_1, Int64>.Validate(values: input));
 		}
 		[Test]
 		public void Validate_MultipleValues_Returns()
@@ -60,7 +64,7 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors: false);
 
 			//Test
-			Assert.DoesNotThrow(() => NotNull<int?>.Validate(values: input));
+			Assert.DoesNotThrow(() => InRange<Range_Int64_neg100_1, Int64>.Validate(values: input));
 		}
 	}
 }

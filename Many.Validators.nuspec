@@ -15,7 +15,7 @@
 		<licenseUrl>https://github.com/yeyopepe/Many.Validators/blob/main/LICENSE.txt</licenseUrl>
 		<releaseNotes>
 			v.3.0.0
-			- Added: Explicit validation
+			- Added: Multiple explicit validations
 			v.2.0.0
 			- Added: InRange validator
 			v.1.1.0

@@ -5,12 +5,12 @@ using System.Linq;
 namespace Many.Validators.Tests
 {
 	[TestFixture]
-	internal partial class NotNullTests
+	internal partial class NotNullOrEmptyTests
 	{
-		readonly int?[] _inputErrors = new int?[] { null, null };
-		readonly int?[] _inputValid = new int?[] { 1, 5, 234, -100 };
+		readonly string[] _inputErrors = new string[] { null, "" };
+		readonly string[] _inputValid = new string[] { "1", "5", "234" };
 
-		private int?[] GetInput(bool includeErrors = true)
+		private string[] GetInput(bool includeErrors = true)
 			=> includeErrors ?
 				_inputValid.Concat(_inputErrors).ToArray() :
 				_inputValid;
@@ -24,8 +24,8 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
-													errors: out int?[] errors);
+			var result = NotNullOrEmpty.IsValid(values: input,
+													errors: out string[] errors);
 			//Assert
 			Assert.AreEqual(expectedResult, result);
 			Assert.AreEqual(expectedResult ? 0 : _inputErrors.Length, errors.Length);
@@ -38,8 +38,8 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
-													firstError: out int? error);
+			var result = NotNullOrEmpty.IsValid(values: input,
+													firstError: out string error);
 			//Assert
 			Assert.AreEqual(expectedResult, result);
 			Assert.IsNull(error);
@@ -51,7 +51,7 @@ namespace Many.Validators.Tests
 			var input = GetInput();
 
 			//Test
-			Assert.Throws<ArgumentNullException>(() => NotNull<int?>.Validate(values: input));
+			Assert.Throws<ArgumentNullException>(() => NotNullOrEmpty.Validate(values: input));
 		}
 		[Test]
 		public void Validate_MultipleValues_Returns()
@@ -60,7 +60,7 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors: false);
 
 			//Test
-			Assert.DoesNotThrow(() => NotNull<int?>.Validate(values: input));
+			Assert.DoesNotThrow(() => NotNullOrEmpty.Validate(values: input));
 		}
 	}
 }

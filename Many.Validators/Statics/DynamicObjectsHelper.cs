@@ -13,7 +13,7 @@ namespace Many.Validators.Statics
         /// <exception cref="ArgumentNullException"></exception>
         public static void ThrowExceptionIfNull<TValidator, TValue>(object value)
           where TValidator : IValidator<TValue>
-        {
+         {
             if (value is null)
                 throw new ArgumentNullException(paramName: nameof(value), message: GetExceptionMessageForValidator<TValidator, TValue>(value, "can not be null"));
         }

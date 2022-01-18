@@ -5,10 +5,10 @@ using System.Linq;
 namespace Many.Validators.Tests
 {
 	[TestFixture]
-	internal partial class NotNullTests
+	internal partial class PositiveOrZeroTests
 	{
-		readonly int?[] _inputErrors = new int?[] { null, null };
-		readonly int?[] _inputValid = new int?[] { 1, 5, 234, -100 };
+		readonly int?[] _inputErrors = new int?[] { -1, -100 };
+		readonly int?[] _inputValid = new int?[] { 1, 5, 234, 0 };
 
 		private int?[] GetInput(bool includeErrors = true)
 			=> includeErrors ?
@@ -18,13 +18,13 @@ namespace Many.Validators.Tests
 
 		[TestCase(false, true)]
 		[TestCase(true, false)]
-		public void IsValid_ReturnsAllErrors(bool includeErrors, bool expectedResult)
+		public void IsValid_ReturnsFirstError(bool includeErrors, bool expectedResult)
 		{
 			//Arrange
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
+			var result = PositiveOrZero<int?>.IsValid(values: input,
 													errors: out int?[] errors);
 			//Assert
 			Assert.AreEqual(expectedResult, result);
@@ -32,17 +32,20 @@ namespace Many.Validators.Tests
 		}
 		[TestCase(false, true)]
 		[TestCase(true, false)]
-		public void IsValid_ReturnsFirstError(bool includeErrors, bool expectedResult)
+		public void IsValid_ReturnsAllErrors(bool includeErrors, bool expectedResult)
 		{
 			//Arrange
 			var input = GetInput(includeErrors);
 
 			//Test
-			var result = NotNull<int?>.IsValid(values: input,
+			var result = PositiveOrZero<int?>.IsValid(values: input,
 													firstError: out int? error);
 			//Assert
 			Assert.AreEqual(expectedResult, result);
-			Assert.IsNull(error);
+			if (!expectedResult)
+				Assert.IsNotNull(error);
+			else
+				Assert.IsNull(error);
 		}
 		[Test]
 		public void Validate_MultipleValues_ThrowsException()
@@ -51,7 +54,7 @@ namespace Many.Validators.Tests
 			var input = GetInput();
 
 			//Test
-			Assert.Throws<ArgumentNullException>(() => NotNull<int?>.Validate(values: input));
+			Assert.Throws<ArgumentOutOfRangeException>(() => PositiveOrZero<int?>.Validate(values: input));
 		}
 		[Test]
 		public void Validate_MultipleValues_Returns()
@@ -60,7 +63,7 @@ namespace Many.Validators.Tests
 			var input = GetInput(includeErrors: false);
 
 			//Test
-			Assert.DoesNotThrow(() => NotNull<int?>.Validate(values: input));
+			Assert.DoesNotThrow(() => PositiveOrZero<int?>.Validate(values: input));
 		}
 	}
 }

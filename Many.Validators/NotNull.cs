@@ -1,7 +1,5 @@
 ﻿using Many.Validators.Statics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Many.Validators
 {
@@ -20,7 +18,6 @@ namespace Many.Validators
 			this.Value = value;
 			Validate(value);
 		}
-		
 
 		#region Converters and operators
 		/// <summary>
@@ -56,19 +53,17 @@ namespace Many.Validators
 
 		#region Explicit validation
 		/// <summary>
-		/// Validates given values
+		/// Validates given value and throws an exception in case of failure 
 		/// </summary>
 		/// <param name="value">Value to validate</param>
-		/// <exception cref="NotImplementedException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
-		internal static void Validate(TValue value)
+		private static void Validate(TValue value)
 			=> value.ThrowExceptionIfNull<NotNull<TValue>, TValue>();
 
 		/// <summary>
-		/// Validates given values and get
+		/// Validates given values and throws an exception in case of failure
 		/// </summary>
 		/// <param name="values">Values to validate</param>
-		/// <exception cref="NotImplementedException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
 		public static void Validate(TValue[] values)
 			=> ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
@@ -82,7 +77,7 @@ namespace Many.Validators
 		/// <param name="values">Values to validate</param>
 		/// <param name="firstError">First erroneous value if found</param>
 		/// <returns>TRUE if validation is success. FALSE otherwise.</returns>
-		public static bool TryValidate(TValue[] values,
+		public static bool IsValid(TValue[] values,
 										out TValue firstError)
 			=> ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
 														throwException: false,
@@ -94,7 +89,7 @@ namespace Many.Validators
 		/// <param name="values">Values to validate</param>
 		/// <param name="errors">Erroneous values if found</param>
 		/// <returns>TRUE if validation is success. FALSE otherwise.</returns>
-		public static bool TryValidate(TValue[] values,
+		public static bool IsValid(TValue[] values,
 										out TValue[] errors)
 			=> ValidationExtensions.TryValidateAll(validation: (s) => Validate(s),
 													out errors,

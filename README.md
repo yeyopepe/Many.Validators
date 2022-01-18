@@ -101,7 +101,7 @@ public void DoSometing(InRange<Neg100_1, Int64> param1)
 Tip: Also you can follow a self-descriptive namespace naming strategy in order to get clearer shorter range names.
 
 
-### Explicit validations
+### Multiple explicit validations
 Also you can validate in a explicit way. If you have a class like this:
 ```
 class YourObject
@@ -117,15 +117,16 @@ public void DoSomething(NotNull<YourObject> param) //This line checks if param i
 {
     var otherParamsToCheck = new string[]{param.Id, param.Data};
 
-    //You can validate params and get an exception if any fails validation
+    //You can validate params and get an exception if any fails validation or...
     NotNull<string>.Validate(otherParamsToCheck);
 
-    //You can validate params and get all erroneous values with no exception
-    NotNull<string>.TryValidate(otherParamsToCheck, out string[] errors);
+    //...you can validate params and get the result with no exceptions
 
-    //You can validate params and get only the first erroneous value with no exception
-    NotNull<string>.TryValidate(otherParamsToCheck, out string error);
-    
+    //Get all errors
+    var result = NotNull<string>.IsValid(otherParamsToCheck, out string[] errors);
+
+    //Get and stop after first error
+    result = NotNull<string>.IsValid(otherParamsToCheck, out string error);    
 }
 ```
 

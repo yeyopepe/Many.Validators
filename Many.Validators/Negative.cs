@@ -20,31 +20,6 @@ namespace Many.Validators
             this.Value = value;
             Validate(value);
         }
-        /// <inheritdoc/>
-		/// <exception cref="InvalidCastException"></exception>
-		/// <exception cref="ArgumentOutOfRangeException"></exception>
-		private void Validate(dynamic value)
-        {
-            ThrowExceptionIfNull<Negative<TValue>, TValue>(value);
-
-            var condition = false;
-            try
-            {
-#if NET5_0_OR_GREATER
-                if (value is Half)
-                    condition = value < (Half)0;
-                else
-#endif
-                    condition = value < 0;
-            }
-            catch
-            {
-                throw new InvalidCastException(message: GetExceptionMessageForValidator<Negative<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
-            }
-
-            if (!condition)
-                throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageForValidator<Negative<TValue>, TValue>(value, "must be lower or equal than zero"));
-        }
 
         #region Converters and operators
         /// <summary>
@@ -77,5 +52,73 @@ namespace Many.Validators
         /// <inheritdoc/>
         public override int GetHashCode() => Value.OverrideGetHashCode();
         #endregion Overrides
+
+        #region Explicit validation
+        /// <summary>
+        /// Validates given value and throws an exception in case of failure 
+        /// </summary>
+        /// <param name="value">Value to validate</param>
+        /// <exception cref="InvalidCastException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        private static void Validate(dynamic value)
+        {
+            ThrowExceptionIfNull<Negative<TValue>, TValue>(value);
+
+            var condition = false;
+            try
+            {
+#if NET5_0_OR_GREATER
+                if (value is Half)
+                    condition = value < (Half)0;
+                else
+#endif
+                condition = value < 0;
+            }
+            catch
+            {
+                throw new InvalidCastException(message: GetExceptionMessageForValidator<Negative<TValue>, TValue>(value, "can not be evaluated because type is not recognized ({t})"));
+            }
+
+            if (!condition)
+                throw new ArgumentOutOfRangeException(paramName: nameof(value), message: GetExceptionMessageForValidator<Negative<TValue>, TValue>(value, "must be lower or equal than zero"));
+        }
+
+        /// <summary>
+        /// Validates given values and throws an exception in case of failure 
+        /// </summary>
+        /// <param name="values">Values to validate</param>
+        /// <exception cref="InvalidCastException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static void Validate(TValue[] values)
+            => ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
+                                                                    throwException: true,
+                                                                    out _,
+                                                                    values);
+
+        /// <summary>
+        /// Tries to validate given values and get first error
+        /// </summary>
+        /// <param name="values">Values to validate</param>
+        /// <param name="firstError">First erroneous value if found</param>
+        /// <returns>TRUE if validation is success. FALSE otherwise.</returns>
+        public static bool IsValid(TValue[] values,
+                                        out TValue firstError)
+            => ValidationExtensions.TryValidateFirst(validation: (s) => Validate(s),
+                                                        throwException: false,
+                                                        out firstError,
+                                                        values);
+        /// <summary>
+        /// Tries to validate given values and get all errors
+        /// </summary>
+        /// <param name="values">Values to validate</param>
+        /// <param name="errors">Erroneous values if found</param>
+        /// <returns>TRUE if validation is success. FALSE otherwise.</returns>
+        public static bool IsValid(TValue[] values,
+                                        out TValue[] errors)
+            => ValidationExtensions.TryValidateAll(validation: (s) => Validate(s),
+                                                    out errors,
+                                                    values);
+
+        #endregion Explicit validation
     }
 }
