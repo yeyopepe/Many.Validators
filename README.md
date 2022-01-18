@@ -75,7 +75,7 @@ var result = WhateverMethod(p);
 ```
 
 ### ✅ InRange validators
-InRange validators need a range 😅. To get that you only need to create your custom range class (inherit from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 
+InRange validators need a range 😅. To get that you only need to create your custom range class (inherited from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 
 
 Example:
 ```
