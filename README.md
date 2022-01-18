@@ -41,16 +41,16 @@ Focused on:
 
 ### ✅Two-way conversion between validator and underlying types
 ```
-NotNull<string> notMullStringValidator = "whatever"; //Ok
-string x = notMullStringValidator; //Ok
+NotNull<string> notNullStringValidator = "whatever"; //Ok
+string x = notNullStringValidator; //Ok
 
-notMullStringValidator.Equals(x); //true!
+notNullStringValidator.Equals(x); //true!
 ```
 
 ### ✅ Seamless integration
 Use validators in your methods referring your underlying type:
 ```
-bool WhateverMethod(NotNull<string> @param)
+bool DoSomething(NotNull<string> @param)
 {
     //@param is observed and validated when is instantiated. 
     //If validation fails no line of code will be run in this method
