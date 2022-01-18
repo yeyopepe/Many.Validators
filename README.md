@@ -39,7 +39,7 @@ Focused on:
 
 
 
-### Two-way conversion between validator and underlying types
+### ✅Two-way conversion between validator and underlying types
 ```
 NotNull<string> notMullStringValidator = "whatever"; //Ok
 string x = notMullStringValidator; //Ok
@@ -47,7 +47,7 @@ string x = notMullStringValidator; //Ok
 notMullStringValidator.Equals(x); //true!
 ```
 
-### Seamless integration
+### ✅ Seamless integration
 Use validators in your methods referring your underlying type:
 ```
 bool WhateverMethod(NotNull<string> @param)
@@ -74,7 +74,7 @@ var result = WhateverMethod(p);
 <Continues if no exception was raised...>
 ```
 
-### InRange validators
+### ✅ InRange validators
 InRange validators need a range 😅. To get that you only need to create your custom range class (inherit from abstract RangeBase class) and implement the abstract properties. Finally be sure to name your class with a self-descritive name. 
 
 Example:
@@ -101,7 +101,7 @@ public void DoSometing(InRange<Neg100_1, Int64> param1)
 Tip: Also you can follow a self-descriptive namespace naming strategy in order to get clearer shorter range names.
 
 
-### Multiple explicit validations
+### ✅ Multiple explicit validations
 Also you can validate in a explicit way. If you have a class like this:
 ```
 class YourObject
@@ -130,6 +130,6 @@ public void DoSomething(NotNull<YourObject> param) //This line checks if param i
 }
 ```
 
-### NetStandard 2.1 and NET60 specific implementations
+### ✅ NetStandard 2.1 and NET60 specific implementations
 - New Half type support for NET5 and NET6 projects.
 
