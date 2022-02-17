@@ -17,7 +17,7 @@ Focused on:
   * [Two-way conversion between validator and underlying types][✅ Two-way conversion between validator and underlying types]
   * [Seamless integration][✅ Seamless integration]
   * [InRange validators][✅ InRange validators]
-  * [Concatenation][✅ Concatenation]
+  * [Concatenation clauses][✅ Concatenation clauses]
   * [Multiple explicit validations][✅ Multiple explicit validations]
   * [NetStandard 2.1 and NET60 specific implementations][✅ NetStandard 2.1 and NET60 specific implementations]
 
@@ -41,7 +41,7 @@ Focused on:
 |Feature                         |Implemented|Version
 |--------------------------------|:---------:|:-------:
 |Multiple explicit validation    |✅         |3.0.0
-|Validators concatenation        |❌         |4.0.0
+|Concatenation clauses           |✅         |4.0.0
 
 
 
@@ -110,14 +110,29 @@ public void DoSometing(InRange<Neg100_1, Int64> param1)
 
 Tip: Also you can follow a self-descriptive namespace naming strategy in order to get clearer shorter range names.
 
-## ✅ Concatenation
+## ✅ Concatenation clauses
+You can concatenate 2 or 3 validators using clauses (they are placed in different namespaces depending on number of validators: Many.Validators.Clauses.S2 and S3):
 
 ```
-public void DoSometing(Concat<int?, NotNull<int?>, Positive<int?>> param1) 
+using Many.Validators.Clauses.S2;
+
+public void DoSometing(AND<int?, NotNull<int?>, Positive<int?>> param1) 
 {
     ...
 }
 ```
+
+or
+
+```
+using Many.Validators.Clauses.S3;
+
+public void DoSometing(AND<int?, NotNull<int?>, Positive<int?>, InRange<Int_1_100, int?>> param1) 
+{
+    ...
+}
+```
+
 
 
 ## ✅ Multiple explicit validations

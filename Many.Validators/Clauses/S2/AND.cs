@@ -1,7 +1,7 @@
 ﻿using Many.Validators.Statics;
 using System;
 
-namespace Many.Validators.Concat.S2
+namespace Many.Validators.Clauses.S2
 {
 	/// <summary>
 	/// Represent a validations' concatenator

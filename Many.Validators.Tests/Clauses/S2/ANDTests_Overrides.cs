@@ -1,8 +1,8 @@
-﻿using Many.Validators.Concat.S2;
+﻿using Many.Validators.Clauses.S2;
 using Many.Validators.Tests.TestCaseSources;
 using NUnit.Framework;
 
-namespace Many.Validators.Tests.Concat.S2
+namespace Many.Validators.Tests.Clauses.S2
 {
 	[TestFixture]
 	internal partial class ANDTests

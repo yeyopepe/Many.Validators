@@ -11,11 +11,11 @@
 		<iconUrl>https://www.nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
 		<description>A set of very-easy-to-read immutable types to add seamless validations in your projects.</description>
 		<tags>performance validator conversion error-handling error exceptions exception-handling exception-reporting net60 netstandard netstandard21 net472</tags>
-		<repository type="git" url="https://github.com/yeyopepe/Many.Mocks" />
+		<repository type="git" url="https://github.com/yeyopepe/Many.Valdiators" />
 		<licenseUrl>https://github.com/yeyopepe/Many.Validators/blob/main/LICENSE.txt</licenseUrl>
 		<releaseNotes>
 			v.4.0.0
-			- Added: Validators concatenation
+			- Added: Concatenation clauses (sizes: 2, 3)
 			v.3.0.0
 			- Added: Multiple explicit validations
 			v.2.0.0
