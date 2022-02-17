@@ -29,10 +29,7 @@ namespace Many.Validators
         /// Implicit conversion method from string to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator NotNullOrEmptyArray<TValue>(TValue value)
-        {
-            return new NotNullOrEmptyArray<TValue>(value);
-        }
+        public static implicit operator NotNullOrEmptyArray<TValue>(TValue value) => new NotNullOrEmptyArray<TValue>(value);
         /// <summary>
         /// </summary>
         /// <param name="value">Current value</param>

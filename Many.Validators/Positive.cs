@@ -26,10 +26,7 @@ namespace Many.Validators
 		/// Implicit conversion method from <see cref="TValue"/> to current
 		/// </summary>
 		/// <param name="value">Underlying value</param>
-		public static implicit operator Positive<TValue>(TValue value)
-		{
-			return new Positive<TValue>(value);
-		}
+		public static implicit operator Positive<TValue>(TValue value) => new Positive<TValue>(value);
 		/// <summary>
 		/// Implicit conversion method from current to <see cref="TValue"/>
 		/// </summary>
