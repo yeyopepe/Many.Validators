@@ -46,7 +46,21 @@ namespace Many.Validators.Concat.S3
 
         #region Overrides
         /// <inheritdoc/>
-        public override bool Equals(object obj) => this.Value.OverrideEquals<V1, TValue>(obj); //Which validator type is irrelevant
+        public override bool Equals(object obj)
+        {
+            bool? comparison;
+            if (obj is TValue)
+                comparison = this.Value?.Equals(((TValue)obj));
+            else if (obj == null && this.Value == null)
+                return true;
+            else if (obj == null ||
+                !(obj is AND<TValue, V1, V2, V3>))
+                return false;
+            else
+                comparison = this.Equals(((AND<TValue, V1, V2, V3>)obj).Value);
+
+            return comparison.HasValue && comparison.Value;
+        }
         /// <inheritdoc/>
         public override string ToString() => Value.OverrideToString();
         /// <inheritdoc/>

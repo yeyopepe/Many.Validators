@@ -72,5 +72,20 @@ namespace Many.Validators.Tests
             NotNull<TValue> a2 = value2;
             Assert.IsFalse(a1.Equals(a2));
         }
+
+        [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Double))]
+        [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Int64))]
+        public void ToString_ReturnsValueAsString<TValue>(TValue value1)
+        {
+            NotNull<TValue> a1 = value1;
+            Assert.AreEqual(value1.ToString(), a1.ToString());
+        }
+        [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Double))]
+        [TestCaseSource(typeof(NullableNumericPositiveTestCaseSources), nameof(NullableNumericPositiveTestCaseSources.Int64))]
+        public void GetHashCode_ReturnsSameHashCode<TValue>(TValue value1)
+        {
+            NotNull<TValue> a1 = value1;
+            Assert.AreEqual(value1.GetHashCode(), a1.GetHashCode());
+        }
     }
 }

@@ -33,7 +33,7 @@
             new object[] { "asdasdff", "asdf" },
         };
         public static readonly object[] NotEmptyLists =
-       {
+        {
             new object[] { new[]{"234", "asdf" }, new[] { "asdf", "asdf" } },
             new object[] { new[]{ "asdf", "234" }, new[] { "asdf", "asdf" } }
         };

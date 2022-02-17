@@ -55,5 +55,20 @@ namespace Many.Validators.Tests
 			NotNullOrEmptyArray<TValue> a2 = value2;
 			Assert.IsFalse(a1.Equals(a2));
 		}
+
+		[TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmptyList))]
+		public void ToString_ReturnsValueAsString<TValue>(TValue value1)
+			where TValue : IEnumerable
+		{
+			NotNullOrEmptyArray<TValue> a1 = value1;
+			Assert.AreEqual(value1.ToString(), a1.ToString());
+		}
+		[TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmptyList))]
+		public void GetHashCode_ReturnsSameHashCode<TValue>(TValue value1)
+			where TValue : IEnumerable
+		{
+			NotNullOrEmptyArray<TValue> a1 = value1;
+			Assert.AreEqual(value1.GetHashCode(), a1.GetHashCode());
+		}
 	}
 }

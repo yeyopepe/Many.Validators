@@ -92,5 +92,18 @@ namespace Many.Validators.Tests
 			InRange<Range_Double_neg100_1, double> a2 = value2;
 			Assert.IsFalse(a1.Equals(a2));
 		}
+
+		[TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Double_InRange_neg100_1))]
+		public void ToString_ReturnsValueAsString(double value1)
+		{
+			InRange<Range_Double_neg100_1, double> a1 = value1;
+			Assert.AreEqual(value1.ToString(), a1.ToString());
+		}
+		[TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Double_InRange_neg100_1))]
+		public void GetHashCode_ReturnsSameHashCode(double value1)
+		{
+			InRange<Range_Double_neg100_1, double> a1 = value1;
+			Assert.AreEqual(value1.GetHashCode(), a1.GetHashCode());
+		}
 	}
 }

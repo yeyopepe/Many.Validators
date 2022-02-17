@@ -54,5 +54,21 @@ namespace Many.Validators.Tests
             Negative<TValue> a2 = value2;
             Assert.IsFalse(a1.Equals(a2));
         }
+
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Double))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int64))]
+        public void ToString_ReturnsValueAsString<TValue>(TValue value1)
+        {
+            Negative<TValue> a1 = value1;
+            Assert.AreEqual(value1.ToString(), a1.ToString());
+        }
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Double))]
+        [TestCaseSource(typeof(NumericNegativeTestCaseSources), nameof(NumericNegativeTestCaseSources.Int64))]
+        public void GetHashCode_ReturnsSameHashCode<TValue>(TValue value1)
+        {
+            Negative<TValue> a1 = value1;
+            Assert.AreEqual(value1.GetHashCode(), a1.GetHashCode());
+        }
+
     }
 }

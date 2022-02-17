@@ -48,5 +48,18 @@ namespace Many.Validators.Tests
             NotNullOrEmpty a2 = value2;
             Assert.IsFalse(a1.Equals(a2));
         }
+
+        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
+        public void ToString_ReturnsValueAsString(string value1)
+        {
+            NotNullOrEmpty a1 = value1;
+            Assert.AreEqual(value1.ToString(), a1.ToString());
+        }
+        [TestCaseSource(typeof(ClassTestCaseSources), nameof(ClassTestCaseSources.NotEmpty))]
+        public void GetHashCode_ReturnsSameHashCode(string value1)
+        {
+            NotNullOrEmpty a1 = value1;
+            Assert.AreEqual(value1.GetHashCode(), a1.GetHashCode());
+        }
     }
 }

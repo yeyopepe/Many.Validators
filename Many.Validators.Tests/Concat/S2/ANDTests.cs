@@ -5,7 +5,7 @@ using System;
 namespace Many.Validators.Tests.Concat.S2
 {
 	[TestFixture]
-	internal class ANDTests
+	internal partial class ANDTests
 	{
 		[Test]
 		public void Concatenation_ValidValues_ReturnsTrue()
