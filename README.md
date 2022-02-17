@@ -41,7 +41,7 @@ Focused on:
 |Feature                         |Implemented|Version
 |--------------------------------|:---------:|:-------:
 |Multiple explicit validation    |✅         |3.0.0
-|Concatenation clauses           |✅         |4.0.0
+|Concatenation clause (AND)      |✅         |4.0.0
 
 
 
