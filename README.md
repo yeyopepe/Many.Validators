@@ -41,7 +41,7 @@ Focused on:
 |Feature                         |Implemented|Version
 |--------------------------------|:---------:|:-------:
 |Multiple explicit validation    |✅         |3.0.0
-|Concatenation clause (AND)      |✅         |4.0.0
+|Concatenation clause (All)      |✅         |4.0.0
 
 
 
@@ -116,7 +116,7 @@ You can concatenate 2 or 3 validators using clauses (they are placed in differen
 ```
 using Many.Validators.Clauses.S2;
 
-public void DoSometing(AND<int?, NotNull<int?>, Positive<int?>> param1) 
+public void DoSometing(All<int?, NotNull<int?>, Positive<int?>> param1) 
 {
     ...
 }
@@ -127,7 +127,7 @@ or
 ```
 using Many.Validators.Clauses.S3;
 
-public void DoSometing(AND<int?, NotNull<int?>, Positive<int?>, InRange<Int_1_100, int?>> param1) 
+public void DoSometing(All<int?, NotNull<int?>, Positive<int?>, InRange<Int_1_100, int?>> param1) 
 {
     ...
 }

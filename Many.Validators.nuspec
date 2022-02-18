@@ -15,7 +15,7 @@
 		<licenseUrl>https://github.com/yeyopepe/Many.Validators/blob/main/LICENSE.txt</licenseUrl>
 		<releaseNotes>
 			v.4.0.0
-			- Added: Concatenation clauses (sizes: 2, 3)
+			- Added: Concatenation clause All (support 2 and 3 validators)
 			v.3.0.0
 			- Added: Multiple explicit validations
 			v.2.0.0

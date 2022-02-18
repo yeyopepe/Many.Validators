@@ -10,7 +10,7 @@ namespace Many.Validators.Clauses.S3
     /// <typeparam name="V1">First validator type</typeparam>
     /// <typeparam name="V2">Second validator type</typeparam>
     /// <typeparam name="V3">Third validator type</typeparam>
-    public readonly struct AND<TValue, V1, V2, V3>
+    public readonly struct All<TValue, V1, V2, V3>
         where V1 : IValidator<TValue>
         where V2 : IValidator<TValue>
         where V3 : IValidator<TValue>
@@ -20,7 +20,7 @@ namespace Many.Validators.Clauses.S3
         /// <inheritdoc/>V1
         public TValue Value { get; }
 
-        public AND(TValue value)
+        public All(TValue value)
         {
             this.Value = value;
             Validate(value);
@@ -31,17 +31,17 @@ namespace Many.Validators.Clauses.S3
         /// Implicit conversion method from <see cref="TValue"/> to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator AND<TValue, V1, V2, V3>(TValue value) => new AND<TValue, V1, V2, V3>(value);
+        public static implicit operator All<TValue, V1, V2, V3>(TValue value) => new All<TValue, V1, V2, V3>(value);
 
         /// <summary>
         /// Implicit conversion method from current to <see cref="TValue"/>
         /// </summary>
         /// <param name="value">Current value</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator TValue(AND<TValue, V1, V2, V3> value) => value.Value;
+        public static implicit operator TValue(All<TValue, V1, V2, V3> value) => value.Value;
         
-        public static bool operator ==(object source, AND<TValue, V1, V2, V3> other) => source.Equals(other);
-        public static bool operator !=(object source, AND<TValue, V1, V2, V3> other) => !source.Equals(other);
+        public static bool operator ==(object source, All<TValue, V1, V2, V3> other) => source.Equals(other);
+        public static bool operator !=(object source, All<TValue, V1, V2, V3> other) => !source.Equals(other);
         #endregion Converters and operators
 
         #region Overrides
@@ -54,10 +54,10 @@ namespace Many.Validators.Clauses.S3
             else if (obj == null && this.Value == null)
                 return true;
             else if (obj == null ||
-                !(obj is AND<TValue, V1, V2, V3>))
+                !(obj is All<TValue, V1, V2, V3>))
                 return false;
             else
-                comparison = this.Equals(((AND<TValue, V1, V2, V3>)obj).Value);
+                comparison = this.Equals(((All<TValue, V1, V2, V3>)obj).Value);
 
             return comparison.HasValue && comparison.Value;
         }
