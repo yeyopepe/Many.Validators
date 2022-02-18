@@ -9,7 +9,7 @@ namespace Many.Validators.Clauses.S2
 	/// <typeparam name="TValue">Underlying type</typeparam>
 	/// <typeparam name="V1">First validator type</typeparam>
 	/// <typeparam name="V2">Second validator type</typeparam>
-	public readonly struct All<TValue, V1, V2>
+	public readonly struct All<V1, V2, TValue>
 		where V1 : IValidator<TValue>
 		where V2 : IValidator<TValue>
 	{
@@ -27,17 +27,17 @@ namespace Many.Validators.Clauses.S2
 		/// Implicit conversion method from <see cref="TValue"/> to current
 		/// </summary>
 		/// <param name="value">Underlying value</param>
-		public static implicit operator All<TValue, V1, V2>(TValue value) => new All<TValue, V1, V2>(value);
+		public static implicit operator All<V1, V2, TValue>(TValue value) => new All<V1, V2, TValue>(value);
 
 		/// <summary>
 		/// Implicit conversion method from current to <see cref="TValue"/>
 		/// </summary>
 		/// <param name="value">Current value</param>
 		/// <exception cref="ArgumentNullException"></exception>
-		public static implicit operator TValue(All<TValue, V1, V2> value) => value.Value;
+		public static implicit operator TValue(All<V1, V2, TValue> value) => value.Value;
 
-		public static bool operator ==(object source, All<TValue, V1, V2> other) => source.Equals(other);
-		public static bool operator !=(object source, All<TValue, V1, V2> other) => !source.Equals(other);
+		public static bool operator ==(object source, All<V1, V2, TValue> other) => source.Equals(other);
+		public static bool operator !=(object source, All<V1, V2, TValue> other) => !source.Equals(other);
 		#endregion Converters and operators
 
 		#region Overrides
@@ -50,10 +50,10 @@ namespace Many.Validators.Clauses.S2
 			else if (obj == null && this.Value == null)
 				return true;
 			else if (obj == null ||
-				!(obj is All<TValue, V1, V2>))
+				!(obj is All<V1, V2, TValue>))
 				return false;
 			else
-				comparison = this.Equals(((All<TValue, V1, V2>)obj).Value);
+				comparison = this.Equals(((All<V1, V2, TValue>)obj).Value);
 
 			return comparison.HasValue && comparison.Value;
 		}

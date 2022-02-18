@@ -10,7 +10,7 @@ namespace Many.Validators.Clauses.S3
     /// <typeparam name="V1">First validator type</typeparam>
     /// <typeparam name="V2">Second validator type</typeparam>
     /// <typeparam name="V3">Third validator type</typeparam>
-    public readonly struct All<TValue, V1, V2, V3>
+    public readonly struct All<V1, V2, V3, TValue>
         where V1 : IValidator<TValue>
         where V2 : IValidator<TValue>
         where V3 : IValidator<TValue>
@@ -31,17 +31,17 @@ namespace Many.Validators.Clauses.S3
         /// Implicit conversion method from <see cref="TValue"/> to current
         /// </summary>
         /// <param name="value">Underlying value</param>
-        public static implicit operator All<TValue, V1, V2, V3>(TValue value) => new All<TValue, V1, V2, V3>(value);
+        public static implicit operator All<V1, V2, V3, TValue>(TValue value) => new All<V1, V2, V3, TValue> (value);
 
         /// <summary>
         /// Implicit conversion method from current to <see cref="TValue"/>
         /// </summary>
         /// <param name="value">Current value</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public static implicit operator TValue(All<TValue, V1, V2, V3> value) => value.Value;
+        public static implicit operator TValue(All<V1, V2, V3, TValue> value) => value.Value;
         
-        public static bool operator ==(object source, All<TValue, V1, V2, V3> other) => source.Equals(other);
-        public static bool operator !=(object source, All<TValue, V1, V2, V3> other) => !source.Equals(other);
+        public static bool operator ==(object source, All<V1, V2, V3, TValue> other) => source.Equals(other);
+        public static bool operator !=(object source, All<V1, V2, V3, TValue> other) => !source.Equals(other);
         #endregion Converters and operators
 
         #region Overrides
@@ -54,10 +54,10 @@ namespace Many.Validators.Clauses.S3
             else if (obj == null && this.Value == null)
                 return true;
             else if (obj == null ||
-                !(obj is All<TValue, V1, V2, V3>))
+                !(obj is All<V1, V2, V3, TValue>))
                 return false;
             else
-                comparison = this.Equals(((All<TValue, V1, V2, V3>)obj).Value);
+                comparison = this.Equals(((All<V1, V2, V3, TValue>)obj).Value);
 
             return comparison.HasValue && comparison.Value;
         }

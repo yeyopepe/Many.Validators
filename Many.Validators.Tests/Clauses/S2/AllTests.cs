@@ -20,6 +20,6 @@ namespace Many.Validators.Tests.Clauses.S2
 			Assert.Throws<ArgumentOutOfRangeException>(() => Do(param1));
 		}
 
-		private bool Do(All<int?, Positive<int?>, NotNull<int?>> param1) => true;
+		private bool Do(All<Positive<int?>, NotNull<int?>, int?> param1) => true;
 	}
 }
