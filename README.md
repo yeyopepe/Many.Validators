@@ -41,10 +41,11 @@ Focused on:
 
 
 
-|Feature                         |Implemented|Version
-|--------------------------------|:---------:|:-------:
-|Multiple explicit validation    |✅         |3.0.0
-|Concatenation clause (All)      |✅         |4.0.0
+|Feature                             |Implemented|Version
+|------------------------------------|:---------:|:-------:
+|Multiple explicit validation        |✅         |3.0.0
+|Concatenation clause (All)          |✅         |4.0.0
+|Custom exception type and/or message|❌         |
 
 
 
